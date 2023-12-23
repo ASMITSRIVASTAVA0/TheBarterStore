@@ -1,8 +1,12 @@
 const User=require("../models/user.js");
+const path=require("path");
 
 module.exports.renderSignupForm=(req,res)=>{
     // res.render("/user/login.ejs");
-    res.render("C:/Users/sriva/Desktop/java language/Major Project/views/user/signup.ejs");
+    // res.render("C:/Users/sriva/Desktop/java language/Major Project/views/user/signup.ejs");
+    // res.render("/user/login.ejs");
+    const signupViewPath=path.join(__dirname,"../views/user/signup.ejs");
+    res.render(signupViewPath);
 }
 
 module.exports.signup=async (req,res)=>{
@@ -47,8 +51,10 @@ module.exports.login=async (req,res)=>{
 }
 
 module.exports.renderLoginForm=(req,res)=>{
+    const loginViewPath=path.join(__dirname,"../views/user/login.ejs");
+    res.render(loginViewPath);
     // res.render("/user/login.ejs");
-    res.render("C:/Users/sriva/Desktop/java language/Major Project/views/user/login.ejs");
+    // res.render("C:/Users/sriva/Desktop/java language/Major Project/views/user/login.ejs");
 }
 
 module.exports.logout=(req,res,next)=>{
