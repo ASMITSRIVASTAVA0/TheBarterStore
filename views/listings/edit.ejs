@@ -1,0 +1,103 @@
+<% layout("/layouts/boilerplate") %>
+<body>
+    <div class="row">
+        <!-- offset se margin left milti -->
+        <div class="col-8 offset-2">
+            <br>
+            <h3>Edit Your List</h3>
+            <br><br>
+            <!-- ye form put req send to main main listings -->
+            <!-- patch se bhi sayad ye kaam ho jata -->
+            <!-- yaha se update route me jayege -->
+            <form method="POST" action="/listings/<%=listing._id%>?_method=PUT"
+                novalidate 
+                class="needs-validation"
+                enctype="multipart/form-data">
+                <div>
+                    <label for="title" class="form-label">Title</label>
+                    <input id="title"value="<%=listing.title%>" name="listing[title]" 
+                    placeholder="Enter Title" 
+                    type="text"
+                    class="form-control"
+                    required
+                    >
+
+                    <div class="valid-feedback">Title looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid Title</div>
+                </div>
+                <br>
+                <div>
+                    <label for="description" class="form-label">Description</label>
+                    <textarea
+                    class="form-control"
+                    name="listing[description]"
+                    required id="description"
+                    ><%=listing.description%></textarea>
+                    <div class="valid-feedback">Description looks good!</div>
+                    <div class="invalid-feedback">Please enter a short Description</div>
+
+                </div>
+                <br>
+                <!-- price country ek sath -->
+                <div class="row">
+                    <!-- chahte ki col k ratio 4:8 bs md tk hi rhe -->
+                    <div class="md-3 col-md-4" >
+                        <div>
+                            <label for="price" class="form-label">Price</label>
+                            <!-- price me type="number" htao tbki middleware check ho paye -->
+                            <input value="<%=listing.price%>"name="listing[price]" placeholder="Enter Price" class="form-control"
+                            required id="price">
+
+                            <div class="valid-feedback">Price looks affordable!</div>
+                            <div class="invalid-feedback">Please enter a valid Price</div>
+        
+                        </div>
+                    </div>
+                    <div class="md-3 col-md-8">
+                        <div>
+                            <label for="country" class="form-label" >Country</label>
+                            <input value="<%=listing.country%>"name="listing[country]" placeholer="Enter Country" type="text" class="form-control"
+                            required id="country">
+                            
+                            <div class="valid-feedback">Thanks for entering country!</div>
+                            <div class="invalid-feedback">Please enter a valid Country name</div>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <br>
+                <div class="mb-3">
+                    Original Listing Image
+                    <br>
+                    <br>
+                    <%=listing.image.url%>
+                    <img class="show-img"src="<%=listing.image.url%>" alt="image">
+                    <!-- <img src=""> -->
+                </div>
+                <div>
+                    <label for="image" class="form-label" >Upload New Image</label>
+                    <!-- <input id="image"value="<%=listing.image%>"name="listing[image]" placeholder="Enter image URL/Link" type="text" class="form-control"> -->
+                    <input id="image" value="<%=listing.image.url%>" name="listing[image]" placeholder="Upload Image" type="file">
+                </div>
+                <!-- yaha name me ek obj bnaya listing jiski key value assign -->
+                <br>
+                <div>
+                    <label for="location" class="form-label">Location</label>
+                    <input value="<%=listing.location%>" name="listing[location]" placeholder="Enter Location" type="text" class="form-control"
+                    required id="location">
+
+                    <div class="valid-feedback">Thanks for giving location!</div>
+                    <div class="invalid-feedback">Please enter a valid Location</div>
+
+                </div>
+                <br><br>
+                
+                <button class="btn btn-dark add-btn">Edit</button>
+                <br><br>
+            </form>
+        </div>
+    </div>
+    
+    
+</body>

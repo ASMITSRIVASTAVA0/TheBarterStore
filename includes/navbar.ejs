@@ -1,0 +1,98 @@
+<!-- boilerplate.ejs ka nav yaha bnaya -->
+<!-- bootstrap se copy -->
+
+<!-- font awesome me jake icon lo -->
+<!-- to font awesome k cdn link kro -->
+<!-- cdn k link boiler plate me link kro -->
+
+<style>
+  .btn-search{
+    background-color: crimson;
+    color:white;
+    border-radius: 1rem;
+    padding:0 1rem 0 1rem;
+
+  }
+  .btn-search:hover{
+    background-color: crimson;
+    color:white;
+  }
+  .btn-search i{
+    display: inline;
+    margin-right:0.5rem;
+  }
+  .input-search{
+    border-radius: 1rem;
+    padding-left:1rem;
+    padding-right:1rem;
+  }
+</style>
+
+<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary"> -->
+
+<!-- border-bottom ======bootstrap ki class to add it -->
+<!-- taki navbar stick rhe top me =====sticky-top -->
+<nav style="background-color:rgb(187, 192, 192);" class="navbar navbar-expand-md        border-bottom           sticky-top">
+    <div class="container-fluid">
+
+      <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+      <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass fa-shake"></i></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+          <!-- <a class="nav-link " href="/">Home</a> -->
+          <!-- <a class="nav-link" href="#">Features</a> -->
+
+          <!-- active likhne se text thoda dark dikhta -->
+
+          <a class="nav-link" href="/listings">Explore</a>
+          <a class="nav-link " href="/listings/new">Airbnb your home</a>
+          <!-- <a class="nav-link" href="#">Pricing</a> -->
+                    <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
+
+        </div>
+
+        <div class="navbar-nav ms-auto">
+          <form class="d-flex" role="search">
+            <input 
+              class="form-control me-2 input-search" 
+              type="search" 
+              placeholder="Search Destinations" 
+              aria-label="Search"
+            >
+            <button class="btn btn-search" type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>Search
+            </button>
+          </form>
+        </div>
+
+
+        <!-- ms-auto===margin from start to be auto -->
+        <div class="navbar-nav ms-auto">
+         
+
+          <!-- agar user logged in to sirf logout dikhe else signup and login dikhe -->
+          <% if(!currUser) { %>
+            <a class="nav-link" href="/signup"><i class="fa-sharp fa-solid fa-user-plus fa-bounce"></i><b>Sign Up</b></a>
+            <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket fa-beat"></i><b> Log In</b></a>
+          <% } %>
+            <!-- req.user cant be access directly -->
+          <% if(currUser) { %>
+            <a class="nav-link" href="/logout"><b>Log Out </b><i class="fa-solid fa-right-from-bracket fa-fade"></i></a>
+          <% } %>
+
+          <!-- <button style=" height:2rem; width:8rem;" onclick="changeMode()" id="dark-mode-btn">Dark Mode</button> -->
+          <button style=" height:2rem; width:8rem;" onclick="changeMode2()" id="dark-mode-btn" class="light-btn-bg">Light Mode</button>
+          <!-- <button style=" height:2rem; width:8rem;" onclick="changeMode2()" id="dark-mode-btn"> -->
+            <!-- <img src="https://previews.123rf.com/images/marigold88/marigold881304/marigold88130400047/19138313-sunrise-background.jpg"> -->
+          <!-- </button>
+           -->
+          
+
+        </div>
+      </div>
+    </div>
+</nav>

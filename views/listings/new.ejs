@@ -1,0 +1,126 @@
+<!-- is form se app.post me req jayegi for /listings -->
+
+<!-- vaidations ke liye ======-->
+<!-- 1=> novalidate -->
+<!-- 2=> class="needs-validation" -->
+<!-- 3=> required -->
+<!-- 4=>class="valid-feedback" -->
+<!-- 5=>class="invalid-feedback" -->
+
+<% layout("/layouts/boilerplate") %>
+<!-- layouts aur listings sibling directorires to / n ki ./ -->
+<body>
+    <div class="row">
+        <!-- offset se margin left milti -->
+        <div class="col-8 offset-2">
+            <br>
+            <h2 style="color:crimson">Create New List</h2>
+            <br><br>
+            <!-- ye form post req send to main main listings -->
+            <!-- taki validation same rhe har brower me bootstrap me form me jake validators me pdo -->
+            <!-- firstly add attribute =====novalidate -->
+            <!-- then class="needs-validation" -->
+
+
+            <!-- taki form me file bhi upload kr skte===enctype="multipart/form-data" -->
+            <form method="POST" 
+            action="/listings" 
+            novalidate 
+            class="needs-validation"
+            enctype="multipart/form-data">
+                <!-- is baar req ke body me listing obj jayega -->
+                <div>
+                    <label for="title" class="form-label">Title</label>
+                    <input name="listing[title]" 
+                    placeholder="Enter Title" 
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    required>
+                    
+                    <!-- Please fill in this field -->
+                    <!-- form validation from cliet side -->
+
+                    <!-- success and failure text pop ho -->
+                    <div class="valid-feedback">Title looks good!</div>
+                    <div class="invalid-feedback">Please enter a valid Title</div>
+                </div>
+                
+                <br>
+                <div>
+                    <label for="description" class="form-label">Description</label>
+                    <textarea
+                    name="listing[description]"
+                    class="form-control" 
+                    required
+                    id="description"></textarea>
+
+
+                    <!-- success failure text -->
+                    <div class="valid-feedback">Description looks good!</div>
+                    <div class="invalid-feedback">Please enter a short Description</div>
+
+                </div>
+                <br>
+                <!-- price country ek sath to bootstrap ki row class lo jisse item row me -->
+                <div class="row">
+                    <!-- chahte ki col k ratio 4:8 bs md tk hi rhe -->
+                    <div class="md-3 col-md-4" >
+                        <div>
+                            <label for="price" class="form-label">Price</label>
+                            <input name="listing[price]" placeholder="Enter Price" class="form-control"
+                            required
+                            id="price">
+        
+                        </div>
+
+                        <div class="valid-feedback">Price looks affordable!</div>
+                        <div class="invalid-feedback">Please enter a valid Price</div>
+
+                    </div>
+                    <div class="md-3 col-md-8">
+                        <div>
+                            <label for="country" class="form-label" >Country</label>
+                            <input name="listing[country]" placeholer="Enter Country" type="text" class="form-control"
+                            required id="country">
+
+
+                            <div class="valid-feedback">Thanks for entering country!</div>
+                            <div class="invalid-feedback">Please enter a valid Country name</div>
+
+                        </div>
+                    </div>
+                </div>
+                
+                <br>
+                <div>
+
+                    <!-- taki img ke url(text) ki jagah file upload kr skte type=file -->
+                    <label for="image" class="form-label" >Upload Image</label>
+                    <input name="listing[image]" placeholder="Enter image URL/Link" 
+                    type="file" 
+                    class="form-control" id="image"
+                    required>
+                </div>
+                <!-- yaha name me ek obj bnaya listing jiski key value assign -->
+                <br>
+                <div>
+                    <label for="location" class="form-label">Location</label>
+                    <input name="listing[location]" placeholder="Enter Location" type="text" class="form-control"
+                    required id="location">
+
+
+                    <div class="valid-feedback">Thanks for giving location!</div>
+                    <div class="invalid-feedback">Please enter a valid Location</div>
+
+
+                </div>
+                <br><br>
+                
+                <button class="btn btn-dark add-btn">Add</button>
+                <br><br>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

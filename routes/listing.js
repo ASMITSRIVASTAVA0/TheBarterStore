@@ -1,0 +1,176 @@
+// structuring routes
+// app.use("/listings",listings);
+// /listings yaha se aaya aur baki /route(s) me milaga
+
+
+
+const express=require("express");
+const router=express.Router();
+
+// route me jojo use hua use require
+const wrapAsync =require("../utils/wrapAsync.js");
+const ExpressError=require("../utils/ExpressError.js");
+const {listingSchema,reviewSchema}=require("../schema.js");//Joi k schema
+const Listing=require("../models/listing.js");
+
+// to use loggedin middleware
+const {isLoggedIn,isOwner,validateListing}=require("../middleware.js");
+// const {isOwner}=require("../middleware.js
+
+const listingController=require("../controllers/listings.js");
+
+// to upload img file
+const multer=require("multer");
+
+// upload ke pehle require
+const {storage}=require("../cloudConfig.js");
+// const upload=multer({dest:"uploads/"});
+const upload=multer({storage});
+//khud se upload naam ke folder me save krega
+
+
+// new and create route
+// get req bhejege form ko
+// form se post req create route pr jayega
+// /listing pr jisme nayi listing bna rhe hoge
+
+router.get("/new",
+    isLoggedIn,
+    wrapAsync( listingController.renderNewForm)
+)
+
+// jin routes k path same pr req diff unko ek sath
+router.route("/")
+.get(wrapAsync(listingController.index))
+.post(
+isLoggedIn,
+//agar hopscotch is req bheji tb bhi logged in ho
+// update aur new route me data add hota to schema ke acc hona chahiye
+// validateListing,
+upload.single("listing[image]"),//pehle isko call phir aage
+// validateListing joi k func
+// jb is route me post req ayegi to sath (req,res,next) bhi ayega
+// validateListing me parameter ko value mili phir ye func joi k /schema.js se compare krega
+wrapAsync(listingController.createListing)
+);
+// .post(
+//     upload.single("listing[image]"),//ek single file ko upload(folder me) kr rhe joki listing[image] se ayegi
+//     (req,res)=>{
+//     // multer ko use krne se req.body ki tarah req.file jisme file se related data save 
+//     // res.send(req.body);
+//     res.send(req.file);
+//     // pehle output={} kyki abhi urlencoded data ko hi pd payega
+//     // go to npmjs.com then multer
+// })
+
+router.route("/:id")
+.get(wrapAsync( listingController.showListing))
+.delete(
+    isLoggedIn,
+    isOwner,
+    wrapAsync(listingController.destroyListing)
+)
+.put(
+    isLoggedIn,
+    isOwner,
+    upload.single("listing[image]"),
+    validateListing,
+    wrapAsync(listingController.updateListing)
+)
+
+
+
+
+// index route
+// get req accept /listing pr
+// sbko wrapAsync me dalo
+// router.
+// create router (new)upar isliye kyuki show route new ko id samhega
+
+
+
+// important
+
+
+// create route
+/*
+app.post("/listings",async (req,res,next)=>{
+    // agar price me kisi se string bhegi to err so place all in try catch
+    // .save me err a skta agar glt data save krna chaha
+    try{
+        // yaha db me changes
+        // extract info
+        // way 1
+        // let {title,description, image, price, country, location }=req.body;
+
+        // new.ejs ke form me name ko hi listing obj ke key value de
+
+        // let listing=req.body.listing;
+        // console.log(listing);
+        const newListing=new Listing(req.body.listing);
+        console.log(newListing);
+        // save is a async func so use await
+        await newListing.save();
+        res.redirect("/listings");
+        // app.post k kaam sirf db update krna uske baad redirect ho main page me
+    }
+    catch(err)
+    {
+        next(err);
+    }
+
+})*/
+
+// create route 
+// validate ko as middleware pass kiya
+// add new listing ke form ne iske post req bheji
+// router.post("/",
+//     isLoggedIn,//agar hopscotch is req bheji tb bhi logged in ho
+//     // update aur new route me data add hota to schema ke acc hona chahiye
+//     validateListing,//pehle isko call phir aage
+//     // validateListing joi k func
+//     // jb is route me post req ayegi to sath (req,res,next) bhi ayega
+//     // validateListing me parameter ko value mili phir ye func joi k /schema.js se compare krega
+//     wrapAsync(listingController.createListing)
+// )
+
+
+// show route 
+// yaha har id ke liye get req ayegi 
+// is route ko call tb jb root url /listings se tk list ko click
+
+// router.get("/:id",wrapAsync( listingController.showListing))
+
+// update and edit route
+// get req ayegi /listings/:id/edit me phir edit.ejs se form 
+// jise submit krke put req jaygei /listings/:id me
+
+// edit route
+router.get("/:id/edit",
+    isLoggedIn,
+    isOwner,
+    wrapAsync(listingController.renderEditForm )
+)
+
+// update route 
+// jb edit.ejs form se is route pr put req ayegi
+// ye put req aur upar wali get req ek hi route me to yaha se redirect bhi krna pdega
+// router.put("/:id",
+//     isLoggedIn,
+//     isOwner,
+//     validateListing,
+//     wrapAsync(listingController.updateListing)
+// )
+
+// delete route
+// req ayegi /listings/:id pr
+// router.delete("/:id",
+//     isLoggedIn,
+//     isOwner,
+//     wrapAsync(listingController.destroyListing)
+// )
+
+
+// router obj ke andar ke method defined kiya jaha phir app.js me exports
+module.exports=router;
+
