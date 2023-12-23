@@ -168,8 +168,8 @@ async function main(){
     
     // await mongoose.connect("mongodb+srv://ASMIT:asm123@MONGODB@cluster0.pxw2xix.mongodb.net/");
     // await mongoose.connect("mongodb+srv://ASMITasm123@MONGODB@cluster0.pxw2xix.mongodb.net/wanderlust");
-    // await mongoose.connect("mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority");
-    await mongoose.connect(atlasdb_url);
+    await mongoose.connect("mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority");
+    // await mongoose.connect(atlasdb_url);
 }
 
 // render krane ke liye package.json me "engines":{"node":"20.9.0"}
