@@ -102,7 +102,9 @@ const Listing=require("./models/listing.js");
 
 
 // setup to serve static files
-app.use(express.static(path.join(__dirname,"/public")));//ab /public/css/style nhi ,bs /css/style as pubic and app.js is joined
+app.use(express.static(path.join(__dirname,"/public")));
+app.use(express.static(path.join(__dirname,"/includes")));
+//ab /public/css/style nhi ,bs /css/style as pubic and app.js is joined
 // ab style.css sirf boiler plate me link krege to sbme link hoyegi
 
 

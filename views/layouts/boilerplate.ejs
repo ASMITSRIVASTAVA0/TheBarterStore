@@ -51,18 +51,24 @@
     <!-- <%- /*include("../includes/navbar.ejs")*/ %> -->
 
     <!-- include ejs k (n ki ejs-mate k) keyword h -->
-    <%- include(".../includes/navbar.ejs") %>
+    <%- include('../../includes/navbar.ejs'); %>
+
 
     <div class="container">
         <br>
         <!-- ab baki page me body tag chod kr sb hta dege -->
-        <%- include(".../include/flash.ejs")%>
+        <%- include('../../includes/flash.ejs'); %>
+
         <%- body %>
         <!-- body ko import kr lege -->
     </div>
 
     <!-- footer -->
-    <%- include(".../includes/footer.ejs") %>
+    <%- include('../../includes/footer.ejs'); %>
+
+<!-- "C:\Users\sriva\Desktop\java language\Major Project\includes\navbar.ejs" -->
+<!-- "C:\Users\sriva\Desktop\java language\Major Project\views\layouts\boilerplate.ejs" -->
+
 
     <!-- boostrap taki input touch krne pr hover ho-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" 
