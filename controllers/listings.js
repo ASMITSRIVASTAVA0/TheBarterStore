@@ -151,9 +151,24 @@ module.exports.updateListing=async (req,res)=>{
     //     return res.redirect(`/listings/${id}`);
     // }
     
-    // let listing=await Listing.findById(id);
+    let newListing=await Listing.findById(id);
+
+    // let result=geocodingClient.forwordGeocode({
+    //     query:req.body.listing.location,
+    //     limit:1,
+    // })
+    // .send()
+    let result=await geocodingClient.forwardGeocode({
+        query: req.body.listing.location,
+        limit: 1//delhi badi jagah to kai coordinate a skte to 1(limit) coordinate chahiye
+    })
+      .send()
+
+    newListing.geometry=result.body.features[0].geometry;
+
+    await newListing.save();
     
-    let listing=await Listing.findByIdAndUpdate(id,{...req.body.listing});
+    // let listing=await Listing.findByIdAndUpdate(id,{...req.body.listing});
     // agar new photo dali tbhi 
     if(typeof req.file !="undefined")
     {
@@ -187,4 +202,17 @@ module.exports.destroyListing=async (req,res)=>{
 
     req.flash("success","Listing Deleted!");
     res.redirect("/listings");
+}
+
+module.exports.categoryListing=async (req,res)=>{
+    // res.send("category");
+    const {currCategory:category}=req.params;
+    // res.send(category);
+    console.log(category);
+    let allListings=await Listing.find({category:category});
+
+    req.flash("success","Filter Applied!");
+
+    res.render("../views/category/category.ejs",{allListings});
+
 }

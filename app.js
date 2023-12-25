@@ -30,12 +30,16 @@
 
 
 // har koi ye file ko n dekhe
+var atlasdb_url;
 if(process.env.NODE_ENV!="production")
 {
     // dotenv file ko tabhi es file me require jb ye project production level pr nhi
     require("dotenv").config();
+    atlasdb_url=process.env.ATLASDB_URL;
+    console.log(process.env.ATLASDB_URL);
     // console.log(process.env);
-    // console.log(process.env.SECRET);
+    console.log(process.env.MAP_TOKEN);
+    console.log(process.env.SECRET);
 }
 
 
@@ -113,6 +117,7 @@ app.use(express.static(path.join(__dirname,"/includes")));
 // form se cliet side validation ki by not allowing user to leave required fields
 // pr agar hopscotch se glt info aai to uske liye joi
 const {listingSchema,reviewSchema}=require("./schema.js");
+const { stringify } = require("querystring");
 // const {listingSchema}=require("./schema.js");
 
 // make h func to perform work of Joi check req.body when data se send from hopscotch/postman
@@ -149,7 +154,11 @@ const {listingSchema,reviewSchema}=require("./schema.js");
 // connect kro db se
 const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
 
-let atlasdb_url=process.env.ATLASDB_URL;
+// let atlasdb_url=process.env.ATLASDB_URL;
+// atlasdb_url=atlasdb_url.toString();
+// let atlasdb_url=process.env.ATLASDB_URL;
+// console.log(atlasdb_url);
+// atlasdb_url=atlasdb_url.toString();
 
 // console.log(altasdb_url);nod
 
@@ -164,19 +173,20 @@ main()
 async function main(){
     // await mongoose.connect(MONGO_URL);
     
-    // await mongoose.connect(altasdb_url);
-    // await mongoose.connect("mongodb+srv://ASMIT:asm123@MONGODB@cluster0.pxw2xix.mongodb.net/?retryWrites=true&w=majority");
-
-    
-    // await mongoose.connect("mongodb+srv://ASMIT:asm123@MONGODB@cluster0.pxw2xix.mongodb.net/");
-    // await mongoose.connect("mongodb+srv://ASMITasm123@MONGODB@cluster0.pxw2xix.mongodb.net/wanderlust");
-    await mongoose.connect("mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority");
     // await mongoose.connect(atlasdb_url);
+    // await mongoose.connect(stringify(atlasdb_url));
+    console.log(atlasdb_url);
+    await mongoose.connect(atlasdb_url);
+    
+    // await mongoose.connect(process.env.ATLASDB_URL);
+    // await mongoose.connect("mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority");
+    
 }
 
 // render krane ke liye package.json me "engines":{"node":"20.9.0"}
 const store=MongoStore.create({
-    mongoUrl:"mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority",
+    mongoUrl:process.env.ATLASDB_URL,
+    // mongoUrl:"mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority",
     crypto:{
         // secret:"mysupersecretcode",
         secret:process.env.SECRET
@@ -225,7 +235,8 @@ app.use(flash());
 // passport authentication use krne ke liye session required
 // ek session user ke login credentials common rhege taki har page me login n maange
 // step1
-app.use(passport.initialize());//taki har req ke liye passport initialize ho
+app.use(passport.initialize());
+//taki har req ke liye passport initialize ho
 // passport.session ko as midware use krte
 // step2
 app.use(passport.session());//ek session me ek baar login
@@ -263,6 +274,7 @@ app.use((req,res,next)=>{
     res.locals.error=req.flash("error");
     // req.user ko navbar.ejs me direct access n kr skte,so store it in locals
     res.locals.currUser=req.user;
+    console.log(res.locals);
     // locals me khud se success,error,currUser key bna ke value di
     next();
 })
@@ -280,7 +292,9 @@ app.use((req,res,next)=>{
 
 // structuring routes
 // route ke reqire hone ke pehle flash k use
-app.use("/listings",listingRouter);
+app.use("https://major-project-master.onrder.com/listings",listingRouter);
+// app.use("/listings",listingRouter);
+
 app.use("/listings/:id/reviews",reviewRouter);//parent route
 app.use("/",userRouter);
 

@@ -4,6 +4,9 @@ const Review=require("../models/review.js");
 module.exports.createReview=async (req,res)=>{
     let listing=await Listing.findById(req.params.id);
     let newReview=new Review(req.body.review);
+    console.log("rating="+newReview.rating);
+    if(newReview.rating==null)
+    newReview.rating=5;
 
     newReview.author=req.user._id;
     // console.log(newReview);

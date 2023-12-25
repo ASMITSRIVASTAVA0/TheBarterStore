@@ -59,12 +59,14 @@ const listingSchema=new Schema({//Schema==mongoose.Schema
             required:true
         }
     },
-    // category:{
-    //     type:String,
-    //     enum:["mountains","arctic","farms","deserts"],
-    //     required:true
+    category:{
+        type:String,
+        enum:["Mountains","Arctic","Farms",
+        "Deserts","Rooms","Iconic Cities",
+        "Dome","Boats","Hill Stations","Castle","Camping","Amazing Pools"],
+        required:true
         
-    // }
+    }
 })
 
 // listingsSchema define hone ke pehle midware bnao

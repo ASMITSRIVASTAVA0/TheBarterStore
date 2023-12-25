@@ -63,6 +63,19 @@ wrapAsync(listingController.createListing)
 //     // go to npmjs.com then multer
 // })
 
+router.route("/category/:currCategory")
+.get(
+    // // res.send("category");
+    // const {currCategory:category}=req.params;
+    // // res.send(category);
+    // console.log(category);
+    // let allListings=await Listing.find({category:category});
+    // res.render("./category/category.ejs",{allListings});
+
+    wrapAsync(listingController.categoryListing)
+
+);
+
 router.route("/:id")
 .get(wrapAsync( listingController.showListing))
 .delete(

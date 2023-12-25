@@ -83,6 +83,9 @@ module.exports.validateListing=(req,res,next)=>{
 }
 
 module.exports.validateReview=(req,res,next)=>{
+    if(!req.body.review.rating)
+    req.body.review.rating=5;
+
     let {error}=reviewSchema.validate(req.body);
     if(error)
     {
