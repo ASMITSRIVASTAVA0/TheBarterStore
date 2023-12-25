@@ -186,8 +186,8 @@ async function main(){
 // render krane ke liye package.json me "engines":{"node":"20.9.0"}
 const store=MongoStore.create({
     // mongoUrl:process.env.ATLASDB_URL,
-    mongoUrl:atlasdb_url,
-    // mongoUrl:"mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority",
+    // mongoUrl:atlasdb_url,
+    mongoUrl:"mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority",
     crypto:{
         // secret:"mysupersecretcode",
         secret:process.env.SECRET
