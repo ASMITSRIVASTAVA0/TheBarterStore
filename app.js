@@ -275,7 +275,7 @@ app.use((req,res,next)=>{
     res.locals.error=req.flash("error");
     // req.user ko navbar.ejs me direct access n kr skte,so store it in locals
     res.locals.currUser=req.user;
-    console.log(res.locals);
+    // console.log(res.locals);
     // locals me khud se success,error,currUser key bna ke value di
     next();
 })
