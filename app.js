@@ -176,10 +176,10 @@ async function main(){
     // await mongoose.connect(atlasdb_url);
     // await mongoose.connect(stringify(atlasdb_url));
     console.log(atlasdb_url);
-    await mongoose.connect(atlasdb_url);
+    // await mongoose.connect(atlasdb_url);
     
     // await mongoose.connect(process.env.ATLASDB_URL);
-    // await mongoose.connect("mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority");
+    await mongoose.connect("mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority");
     
 }
 
