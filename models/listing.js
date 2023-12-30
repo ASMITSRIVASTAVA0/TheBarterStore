@@ -31,7 +31,7 @@ const listingSchema=new Schema({//Schema==mongoose.Schema
     },
     price:Number,
     location:String,
-    country:String,
+    // country:String,
     reviews:[
         {
             // objectid store hogi reviews ki
@@ -59,13 +59,23 @@ const listingSchema=new Schema({//Schema==mongoose.Schema
             required:true
         }
     },
-    category:{
-        type:String,
-        enum:["Mountains","Arctic","Farms",
-        "Deserts","Rooms","Iconic Cities",
-        "Dome","Boats","Hill Stations","Castle","Camping","Amazing Pools"],
-        required:true
+    // category:{
+    //     type:String,
+    //     enum:["Mountains","Arctic","Farms",
+    //     "Deserts","Rooms","Iconic Cities",
+    //     "Dome","Boats","Hill Stations","Castle","Camping","Amazing Pools"],
+    //     required:true
         
+    // }
+    year:{
+        type:String,
+        enum:["1year","2year","3year","4year"],
+        required:true,
+    },
+    condition:{
+        type:String,
+        enum:["new","likenew","unused","acceptable"],
+        required:true,
     }
 })
 

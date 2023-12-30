@@ -14,11 +14,14 @@ module.exports.listingSchema=Joi.object({
         title: Joi.string().required(),
         description: Joi.string().required(),
         location: Joi.string().required(),
-        country: Joi.string().required(),
+        // country: Joi.string().required(),
         price: Joi.number().required().min(0),
         image: Joi.string().allow("",null),
         // category bhi
-        category:Joi.string().required(),
+        // category:Joi.string().required(),
+        year:Joi.string().required(),
+        condition:Joi.string().required(),
+
     }).required()
 
 })
@@ -30,5 +33,13 @@ module.exports.reviewSchema=Joi.object({
         rating:Joi.number().required().min(1).max(5),
         // rating:Joi.number().required(),
         comment:Joi.string().required()
+    }).required()
+})
+
+module.exports.feedbackSchema=Joi.object({
+    feedback:Joi.object({
+        comment:Joi.string().required(),
+        rating:Joi.number().required().min(1).max(5),
+        name:Joi.string().required(),
     }).required()
 })

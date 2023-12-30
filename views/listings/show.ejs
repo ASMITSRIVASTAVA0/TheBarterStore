@@ -1,5 +1,6 @@
 <% layout("/layouts/boilerplate") %>
 <body>
+
     
     <!-- mt==margin from top 3 diya -->
     <div class="row mt-3" >
@@ -15,20 +16,25 @@
             <div class="card-body bg-body-light">
                 <p class="card-text">
                     
-                    <i>Owned By: <%=listing.owner.username%></i>
-                    <br><br>
-                    <b><%= listing.title %></b>
-                    <br><br>
+                    <form method="GET" action="/listings/owner/<%=listing.owner._id%>">
+                        <button class="btn btn-outline-danger">Know About Owner</button>
+                    </form>
+                    <br>
+                                
     
                     <%= listing.description %>
                     <br><br>
                     Price:&nbsp;&nbsp;&#8377;<%=listing.price.toLocaleString("en-IN")%>
                     <br>
-                    Category:&nbsp;&nbsp;<%=listing.category%>
+                    <!-- Category: -->
+                    This is for <%=listing.year%> students;
+                    <br>
+                    Condition:&nbsp;&nbsp;<%=listing.condition%>
                     <br>
                     Location:&nbsp;&nbsp;<%=listing.location %>
                     <br>
-                    Country:&nbsp;&nbsp;<%=listing.country%>
+                    <!-- Country:-->
+
                     
                     
                     <br><br>
@@ -38,10 +44,10 @@
                     <!-- agar curruser logged ho aur -->
                     <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
                         <div class="btns">
-                            <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark add-btn">Edit</a>
+                            <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark add-btn"><i class="fa-solid fa-pen-nib"></i> Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
                             <form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-                                <button class="btn btn-secondary">Delete</button>
+                                <button class="btn btn-secondary"><i class="fa-solid fa-trash"></i> Delete</button>
                             </form>
                 
                         </div>
@@ -108,7 +114,7 @@
                             <!-- review post hoga review db me -->
                             <!-- chuki review connected h listingid se isliye -->
                             <!-- send req to /listings/:id/reviews -->
-                            <button class="btn btn-secondary">Submit</button>
+                            <button class="btn btn-secondary"><i class="fa-solid fa-share-from-square"></i> Submit</button>
                         </form>
 
                     
@@ -128,9 +134,9 @@
                             
                             <!-- listings.reviews me ObjectId store h to populate k use krke review nikala -->
                             <% for(review of listing.reviews) { %>
-                                <div class="card col-5 mb-3 ms-3 bg-body-tertiary">
+                                <div class="card col-5 mb-3 ms-3 bg-body-tertiary" style="width:20rem;">
                                     <!-- ms===margin-start -->
-                                    <div class="card-body">
+                                    <div class="card-body" >
                                         <h5 class="card-title">@<%= review.author.username %></h5>
                                         <p class="starability-result card-text" data-rating="<%=review.rating%>">
                         
@@ -142,7 +148,7 @@
                                             <form 
                                             method="POST" 
                                             action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
-                                                <button class="btn btn-danger btn-sm md-3">Delete</button>
+                                                <button class="btn btn-danger btn-sm md-3"><i class="fa-solid fa-trash"></i> Delete</button>
                                             </form>
                                         <% } %>
                                         

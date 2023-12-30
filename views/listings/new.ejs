@@ -36,7 +36,8 @@
                     type="text"
                     class="form-control"
                     id="title"
-                    required>
+                    required
+                    >
                     
                     <!-- Please fill in this field -->
                     <!-- form validation from cliet side -->
@@ -79,7 +80,7 @@
 
                     </div>
                     <div class="md-3 col-md-8">
-                        <div>
+                        <!-- <div>
                             <label for="country" class="form-label" >Country</label>
                             <input name="listing[country]" placeholer="Enter Country" type="text" class="form-control"
                             required id="country">
@@ -88,6 +89,17 @@
                             <div class="valid-feedback">Thanks for entering country!</div>
                             <div class="invalid-feedback">Please enter a valid Country name</div>
 
+                        </div> -->
+                        <div>
+                            <label for="location" class="form-label">Location</label>
+                            <input name="listing[location]" placeholder="Enter Location" type="text" class="form-control"
+                            required id="location">
+        
+        
+                            <div class="valid-feedback">Thanks for giving location!</div>
+                            <div class="invalid-feedback">Please enter a valid Location</div>
+        
+        
                         </div>
                     </div>
                 </div>
@@ -103,21 +115,11 @@
                     required>
                 </div>
                 <!-- yaha name me ek obj bnaya listing jiski key value assign -->
-                <br>
-                <div>
-                    <label for="location" class="form-label">Location</label>
-                    <input name="listing[location]" placeholder="Enter Location" type="text" class="form-control"
-                    required id="location">
-
-
-                    <div class="valid-feedback">Thanks for giving location!</div>
-                    <div class="invalid-feedback">Please enter a valid Location</div>
-
-
-                </div>
-                <br>
                 
-                <div>
+                
+                
+                
+                <!-- <div>
                     <label for="category" class="form-label">Category</label>
                     <select 
                     name="listing[category]"
@@ -125,6 +127,7 @@
                     class="form-select form-control" 
                     aria-label="Default select example"
                     required>
+                    
                         <option value="Mountains" selected>Mountains</option>
                         <option value="Arctic" name="listing[category]">Arctic</option>
                         <option value="Farms" name="listing[category]">Farms</option>
@@ -141,6 +144,46 @@
 
                     <div class="valid-feedback">Thanks for giving Category!</div>
                     <div class="invalid-feedback">Please enter a valid Category</div>
+                </div> -->
+                <br>
+                <div>
+                    <label for="year" class="form-label">Year</label>
+                    <select 
+                    name="listing[year]"
+                    id="year" 
+                    class="form-select form-control" 
+                    aria-label="Default select example"
+                    required>
+                        <option value="1year" name="" selected>1st Year</option>
+                        <option value="2year" name="">2st Year</option>
+                        <option value="3year" name="">3st Year</option>
+                        <option value="4year" name="">4st Year</option>
+                        
+                    </select>
+
+                    <div class="valid-feedback">Thanks for giving Category!</div>
+                    <div class="invalid-feedback">Please enter a valid Category</div>
+                </div>
+                <br>
+                <div>
+                    <label for="condition" class="form-label">Condition</label>
+                    <select 
+                    name="listing[condition]"
+                    id="condition" 
+                    class="form-select form-control" 
+                    aria-label="Default select example"
+                    required>
+                        <option value="new" name="">New</option>
+                        <option value="likenew" name="">Like New</option>
+                        <option value="unused"name="">Unused</option>
+                        <option value="acceptable"name="">Acceptable</option>
+                    
+                        
+                    </select>
+
+                    <div class="valid-feedback">Thanks for giving Category!</div>
+                    <div class="invalid-feedback">Please enter a valid Category</div>
+
                 </div>
                 <br><br>
                 <button class="btn btn-dark add-btn">Add</button>

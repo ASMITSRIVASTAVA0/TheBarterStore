@@ -73,12 +73,13 @@ const Review=require("./models/review.js");
 
 
 // structing route using express
-const listingRouter=require("./routes/listing.js");
 // /listing route me jaha bhi call vaha listings use so app.use("/listings",listingRouter);
 // route ko struct krne ke baad sirf ek line likh ke get,post,delete,... route chl rhe
 // app.use("/listings",listings);
+const listingRouter=require("./routes/listing.js");
 const reviewRouter=require("./routes/review.js");//ye model h
 const userRouter=require("./routes/user.js");
+const categoryRouter=require("./routes/category.js");
 // ejs-mate k setup
 // ejs-mate se template(boilerplate bna skte hr ejs file k) milte
 const ejsMate=require("ejs-mate");
@@ -175,7 +176,7 @@ async function main(){
     
     // await mongoose.connect(atlasdb_url);
     // await mongoose.connect(stringify(atlasdb_url));
-    console.log(atlasdb_url);
+    // console.log(atlasdb_url);
     // await mongoose.connect(atlasdb_url);
     
     // await mongoose.connect(process.env.ATLASDB_URL);
@@ -294,7 +295,12 @@ app.use((req,res,next)=>{
 // structuring routes
 // route ke reqire hone ke pehle flash k use
 // app.use("https://major-project-master.onrder.com/listings",listingRouter);
+// app.use("/listings/category",async (req,res,next)=>{
+//     res.send("asmit");
+// })
+app.use("/listings/feedback",categoryRouter);
 app.use("/listings",listingRouter);
+
 
 app.use("/listings/:id/reviews",reviewRouter);//parent route
 app.use("/",userRouter);

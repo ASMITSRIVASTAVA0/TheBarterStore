@@ -28,6 +28,19 @@ const userSchema=new Schema({
     email:{
         type:String,
         required:true
+    },
+    profilepic:{
+        url:String,
+        filename:String,
+        // required:true,
+    },
+    bio:{
+        type:String,
+        required:true
+    },
+    year:{
+        type:Number,
+        required:true,
     }
 })
 

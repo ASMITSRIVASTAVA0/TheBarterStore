@@ -146,3 +146,10 @@ body{
     background-image: url("https://images.pexels.com/photos/355887/pexels-photo-355887.jpeg");
     background-size:cover;
 }
+
+.btn-feedback{
+    /* margin-top:0.4rem; */
+    /* margin-botton:0.2rem; */
+    height:2.5rem;
+    width:12rem;
+}

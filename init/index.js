@@ -44,7 +44,7 @@ const initDB=async ()=>{
     // har listing k owner manually add krne ki jagah existing obj(...obj) me ower property ad
     // map func return new arr,so store it in existing arr
     // let asmit52 be owner
-    initData.data=initData.data.map((obj)=>({...obj,owner:'657dab7c11d1fb3660a59b58'}));
+    initData.data=initData.data.map((obj)=>({...obj,owner:'658b075e11fa18289f8fee00'}));
     await Listing.insertMany(initData.data);
     console.log("data was RE-initialized");
 }

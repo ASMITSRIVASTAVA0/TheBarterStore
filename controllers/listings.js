@@ -1,5 +1,7 @@
 // is callbacks store kro
 const Listing=require("../models/listing");
+const User=require("../models/user.js");
+
 
 // const mbxTilesets = require('@mapbox/mapbox-sdk/services/tilesets');
 
@@ -166,6 +168,15 @@ module.exports.updateListing=async (req,res)=>{
 
     newListing.geometry=result.body.features[0].geometry;
 
+    // 
+    newListing.title=req.body.listing.title;
+    newListing.description=req.body.listing.description;
+    newListing.price=req.body.listing.price;
+    newListing.location=req.body.listing.location;
+    newListing.year=req.body.listing.year;
+    newListing.condition=req.body.listing.condition;
+
+    console.log("update route me listing="+newListing);
     await newListing.save();
     
     // let listing=await Listing.findByIdAndUpdate(id,{...req.body.listing});
@@ -215,4 +226,15 @@ module.exports.categoryListing=async (req,res)=>{
 
     res.render("../views/category/category.ejs",{allListings});
 
+}
+
+module.exports.renderOwner=async (req,res)=>{
+    // res.send("owner.email");
+    // let {info:owner}=req.params;
+    // res.send(owner.email);
+    // res.render("../views/category/owner.ejs",{owner});
+    // res.render("../views/category/.ejs",{allListings});
+    let {id}=req.params;
+    let owner=await User.findById(id);
+    res.render("../views/category/owner.ejs",{owner});
 }

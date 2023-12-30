@@ -4,10 +4,11 @@
 
 const Listing=require("./models/listing.js");
 const Review=require("./models/review.js");
+const Feedback=require("./models/feedback.js");
 
 // for validation
 const ExpressError=require("./utils/ExpressError.js");
-const {listingSchema,reviewSchema}=require("./schema.js");//Joi k schema
+const {listingSchema,reviewSchema,feedbackSchema}=require("./schema.js");//Joi k schema
 
 module.exports.isLoggedIn=(req,res,next)=>{
     // console.log("jaha redirect hone wala tha===="+req.path);
@@ -23,7 +24,7 @@ module.exports.isLoggedIn=(req,res,next)=>{
         // console.log(req.session);
         req.session.redirectUrl=req.originalUrl;
         // req.session sbke paas usme ek key-value aur add 
-        req.flash("error","You must be logged in to create Listings");
+        req.flash("error","You must be logged in first");
         return res.redirect("/login");
     }
     
@@ -93,6 +94,22 @@ module.exports.validateReview=(req,res,next)=>{
         throw new ExpressError(400,errMsg);
     }
     else{
+        next();
+    }
+}
+
+module.exports.validateFeedback=(req,res,next)=>{
+    if(!req.body.feedback.rating)
+    req.body.feedback.rating=5;
+
+    let {error}=feedbackSchema.validate(req.body);
+    if(error)
+    {
+        let errMsg=error.details.map((el)=>el.message).join(",");
+        throw new ExpressError(400,errMsg);
+    }
+    else
+    {
         next();
     }
 }

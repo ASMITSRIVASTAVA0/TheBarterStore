@@ -1,0 +1,80 @@
+<!-- yaha se sirf /chats/new          aur       /chats/id me req jayegi -->
+
+<!-- layout keyword h joki ejs-mate me defined-->
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .card li{
+        padding:0.7rem;
+        background-color:black;
+    }
+</style>
+
+<body>
+    
+    <h1 style="color:crimson"class="offset-3">Your Feedback is Valuable!</h1>
+    <br><br>
+    <div class="col-6 offset-3">
+        <form action="/listings/feedback" method="POST" class="needs-validation" novalidate>
+            <div class="mb-3">
+                <label for="name" class="form-label"><h5>Name:</h5></label>
+                <input 
+                name="feedback[name]"
+                id="name"
+                type="text"
+                class="form-control bg-secondary"
+                style="color:black; font-size:1.2rem; font-weight:500;"
+                required>
+
+                <div class="valid-feedback">Looks Good!</div>
+                <div class="invalid-feedback">Please provide your good name!</div>
+            </div>
+            <div class="mb-3">
+                <label for="username" class="form-label"><h5>Feedback:</h5></label>
+                <textarea
+                name="feedback[comment]"
+                id="username"
+                type="text"
+                class="form-control bg-secondary"
+                cols="30"
+                rows="7"
+                style="color:black; font-size:1.2rem; font-weight:500;"
+                required></textarea>
+
+                <div class="valid-feedback">Your feedback improves us!</div> 
+                <div class="invalid-feedback">Please Provide Feedback!</div>
+            </div>
+            <div class="mb-3">
+                 <!-- github se copy paste -->
+                 <label for="rating" class="form-label"><h5>Rate Us:</h5></label>
+                 <fieldset class="starability-growRotate">
+                     <!--  -->
+                     <!-- <legend>First rating:</legend> -->
+                     <!-- <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." /> -->
+                     <input type="radio" id="first-rate1" name="feedback[rating]" value="1" />
+                     <label for="first-rate1" title="Terrible">1 star</label>
+                     <input type="radio" id="first-rate2" name="feedback[rating]" value="2" />
+                     <label for="first-rate2" title="Not good">2 stars</label>
+                     <input type="radio" id="first-rate3" name="feedback[rating]" value="3" />
+                     <label for="first-rate3" title="Average">3 stars</label>
+                     <input type="radio" id="first-rate4" name="feedback[rating]" value="4" />
+                     <label for="first-rate4" title="Very good">4 stars</label>
+                     <input type="radio" id="first-rate5" name="feedback[rating]" value="5" />
+                     <label for="first-rate5" title="Amazing">5 stars</label>
+                 </fieldset>
+            </div>
+
+
+            
+
+            <button class="btn btn-success"><i class="fa-solid fa-share-from-square"></i> Submit</button>
+        </form>
+        <br><br>
+    </div>
+        
+    
+
+</body>
+
+
+

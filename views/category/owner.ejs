@@ -1,0 +1,40 @@
+<!-- yaha se sirf /chats/new          aur       /chats/id me req jayegi -->
+
+<!-- layout keyword h joki ejs-mate me defined-->
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .card li{
+        padding:0.7rem;
+        background-color:black;
+    }
+</style>
+
+<body>
+    <h1 class="offset-3">About Me</h1>
+   
+      <br><br>
+      <div class="card mb-3 offset-3 " style="max-width: 540px; color:; font-weight: 700; background-color: crimson;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="https://www.svgrepo.com/show/382368/avatar-emoji-emoticon-emotion-expression-profile.svg" 
+            class="img-fluid rounded-start" style="background-size:repeat;" 
+            alt="...">
+          </div>
+          <div class="col-md-8"style="background-color: black;">
+            <div class="card-body " >
+              <h5 class="card-title"><h2><%=owner.username%></h2></h5>
+              <hr>
+              <p class="card-text"><%=owner.bio%></p>
+              <p class="card-text"><small class="text-body-secondary"><b>Email:</b><%=owner.email%></small></p>
+              <p class="card-text"><small class="text-body-secondary"><b>Year of Graduation:</b><%=owner.year%></small></p>
+              
+            </div>
+          </div>
+        </div>
+      </div>
+   
+</body>
+
+
+

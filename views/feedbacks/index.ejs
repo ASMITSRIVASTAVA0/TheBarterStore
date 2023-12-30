@@ -1,0 +1,80 @@
+<!-- yaha se sirf /chats/new          aur       /chats/id me req jayegi -->
+
+<!-- layout keyword h joki ejs-mate me defined-->
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .card li{
+        padding:0.7rem;
+        background-color:black;
+    }
+</style>
+
+<body>
+    
+    <h1 style="color:crimson">All Feedbacks <i class="fa-solid fa-comments"></i></h1>
+        
+    <div class="top-divs">
+      <form method="GET" action="/listings/feedback/new"> 
+          <button class="btn btn-secondary">Give FeedBack <i class="fa-solid fa-comments"></i></button>
+      </form>
+      <br><br>
+      <% for(feedback of allFeeds) { %>
+          
+        <div class="card text-bg-light border border-primary">
+          
+          
+          <div class="card-header">
+            <h4 class="card-title" style="color:crimson">@<%=feedback.name%></h4>
+
+            <script>
+              
+            </script>
+
+            <h5 class="card-text"><%=feedback.comment%></h5>
+            
+          </div>
+          <div class="card-body">
+              
+              
+          
+              &nbsp;&nbsp;<p style="size:10rem;" class="starability-result" data-rating="<%=feedback.rating%>">
+          
+
+              <% if(currUser && currUser._id.equals(feedback.author._id)) { %>
+
+                <div class="btns" style="padding:0.5rem;">
+                  &nbsp;
+                  <form style="margin-right:1rem;" method="GET" action="/listings/feedback/<%=feedback._id%>/edit">
+                    <button class="btn btn-danger"><i class="fa-solid fa-pen-nib"></i> Edit</button>
+                    
+                  </form>
+                  <form method="POST" action="/listings/feedback/<%=feedback._id%>?_method=DELETE">
+                    <button class="btn btn-dark"><i class="fa-solid fa-trash"></i> Delete</button>
+                  </form>
+                </div>
+
+              <% } %>
+              <h6>Created On: <%=feedback.createdAt.toLocaleString().split(", ")[0]%>
+                
+              </h6>
+              
+              
+            
+
+          </div>
+
+            
+            
+            
+        </div>
+        <br>
+      
+      <% } %>
+
+    </div>
+
+</body>
+
+
+
