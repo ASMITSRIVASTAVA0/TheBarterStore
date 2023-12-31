@@ -5,14 +5,14 @@
     <!-- mt==margin from top 3 diya -->
     <div class="row mt-3" >
 
-        <div class="col-8 offset-2">
+        <div class="col-8 offset-1">
             <h3 style="color:crimson;"><%=listing.title%></h3>
             <br>
         </div>
         <!-- ek bootstrap ke card me pura data show kiya -->
-        <div class="card col-6 offset-2
+        <div class="card col-9 offset-1
         listing-card" >
-            <img class="show-img"src="<%=listing.image.url%>" alt="image">
+            <img class="show-img"src="<%=listing.image.url%>" alt="image" style="height:50vh; width:36vh; margin:0;">
             <div class="card-body bg-body-light">
                 <p class="card-text">
                     
@@ -100,10 +100,12 @@
                                 <textarea
                                 name="review[comment]"
                                 id="comment"
-                                cols="50"
+                                cols="90"
                                 rows="5"
                                 class="form-control"
                                 required
+                                style="width:30vh;"
+
                                 ></textarea>
 
                                 <div class="invalid-feedback">Please add some comments for review</div>
@@ -134,7 +136,7 @@
                             
                             <!-- listings.reviews me ObjectId store h to populate k use krke review nikala -->
                             <% for(review of listing.reviews) { %>
-                                <div class="card col-5 mb-3 ms-3 bg-body-tertiary" style="width:20rem;">
+                                <div class="card col-9 mb-3 ms-3 bg-body-tertiary" style="width:100vh;">
                                     <!-- ms===margin-start -->
                                     <div class="card-body" >
                                         <h5 class="card-title">@<%= review.author.username %></h5>

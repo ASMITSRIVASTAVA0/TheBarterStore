@@ -81,6 +81,7 @@ body{
 }
 .card-text p{
     font-weight:900;
+
 }
 /* pure card ko anchor bnaye to uderline htane ke liye */
 .a-card-link{
@@ -123,11 +124,19 @@ body{
 
 /* map ki styling */
 #map{
-    /* height:25rem; */
-    /* width:30rem; */
-    height:60vh;
-    width:80vh;
+    height:25rem;
+    width:20rem;
+    /* height:60vh; */
+    /* width:80vh; */
     border:0.1px solid black;
+}
+@media(max-width:650px){
+    #map{
+        width:15rem;
+        /* width:90vh; */
+        height:20rem;
+        margin:0 ;
+    }
 }
 
 

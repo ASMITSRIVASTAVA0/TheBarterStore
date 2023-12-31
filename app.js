@@ -298,12 +298,13 @@ app.use((req,res,next)=>{
 // app.use("/listings/category",async (req,res,next)=>{
 //     res.send("asmit");
 // })
+app.use("/",userRouter);
 app.use("/listings/feedback",categoryRouter);
 app.use("/listings",listingRouter);
 
 
 app.use("/listings/:id/reviews",reviewRouter);//parent route
-app.use("/",userRouter);
+
 
 // structuring review route
 

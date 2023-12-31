@@ -50,7 +50,7 @@
 
 <!-- border-bottom ======bootstrap ki class to add it -->
 <!-- taki navbar stick rhe top me =====sticky-top -->
-<nav style="background-color:rgb(187, 192, 192);" class="navbar navbar-expand-md        border-bottom           sticky-top">
+<nav style="background-color:rgb(0, 0, 0);" class="navbar navbar-expand-md        border-bottom           sticky-top">
     <div class="container-fluid">
 
       <!-- <a class="navbar-brand" href="#">Navbar</a> -->
@@ -68,8 +68,8 @@
 
           <!-- active likhne se text thoda dark dikhta -->
          
-          <a class="nav-link left-link" href="/listings"><i class="fa-solid fa-earth-americas"></i> All Products</a>
-          <a class="nav-link left-link" href="/listings/new"><i class="fa-solid fa-plus"></i> Sell Your Product</a>
+          <a style="color:white !important"class="nav-link left-link" href="/listings"><i class="fa-solid fa-earth-americas"></i> All Products</a>
+          <a style="color:white !important" class="nav-link left-link" href="/listings/new"><i class="fa-solid fa-plus"></i> Sell Your Product</a>
 
           
           
@@ -87,19 +87,19 @@
 
           <!-- agar user logged in to sirf logout dikhe else signup and login dikhe -->
           <% if(!currUser) { %>
-            <a class="nav-link" href="/signup"><i class="fa-sharp fa-solid fa-user-plus fa-bounce"></i><b>Sign Up</b></a>
-            <a class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket fa-beat"></i><b> Log In</b></a>
+            <a style="color:white !important" class="nav-link" href="/signup"><i class="fa-sharp fa-solid fa-user-plus fa-bounce"></i><b>Sign Up</b></a>
+            <a  style="color:white !important"class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket fa-beat"></i><b> Log In</b></a>
           <% } %>
             <!-- req.user cant be access directly -->
           <% if(currUser) { %>
-            <a class="nav-link" href="/logout"><b>Log Out </b><i class="fa-solid fa-right-from-bracket fa-fade"></i></a>
+            <a  style="color:white !important"class="nav-link" href="/logout"><b>Log Out </b><i class="fa-solid fa-right-from-bracket fa-fade"></i></a>
           <% } %>
 
       
           <!-- <button style=" height:2rem; width:8rem;" onclick="changeMode2()" id="dark-mode-btn" class="light-btn-bg">Light Mode</button> -->
-                    <button class="btn btn-feedback btn-dark">
+                    <button class="btn btn-feedback btn-light">
             <!-- Give FeedBack -->
-            <a href="/listings/feedback" style="text-decoration: none; color:white; font-size:1.2rem;"><i class="fa-solid fa-comments"></i> Give Feedback</a>
+            <a href="/listings/feedback" style="text-decoration: none; color:black; font-size:1.2rem;"><i class="fa-solid fa-comments"></i> Give Feedback</a>
 
           </button>
           
