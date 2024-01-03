@@ -119,6 +119,7 @@ app.use(express.static(path.join(__dirname,"/includes")));
 // pr agar hopscotch se glt info aai to uske liye joi
 const {listingSchema,reviewSchema}=require("./schema.js");
 const { stringify } = require("querystring");
+const { resolveSoa } = require("dns");
 // const {listingSchema}=require("./schema.js");
 
 // make h func to perform work of Joi check req.body when data se send from hopscotch/postman
@@ -321,7 +322,16 @@ app.use("/listings/:id/reviews",reviewRouter);//parent route
 app.all("*",(req,res,next)=>{
     // Custom error class ExpressError joki child h error class ki uski value assgin
     // next se app.use((err,req,res,next)) route ko call jisse error.ejs render
-    next(new ExpressError(404,"Page not Found"));
+    // next(new ExpressError(404,"Page not Found"));
+
+
+    // req.flash("error","Page not Found!");
+    // res.send("page not found");
+    // res.render("views/listings/index.ejs");
+    req.flash("error","Page not Found");
+    res.redirect("/listings");
+    // res.render("./views/listings/index.ejs");
+    // res.redirect("./public/views/listings/index.ejs");
 })
 
 // middleware ko last likha kro sare routes se
