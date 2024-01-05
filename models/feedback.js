@@ -19,7 +19,7 @@ const feedbackSchema=new Schema({
     },
     author:{
         type:Schema.Types.ObjectId,
-        href:"User",
+        ref:"User",
     },
     name:{
         type:String,

@@ -7,11 +7,17 @@ const Listing=require("./listing.js");
 const reportSchema=new Schema({
     from:{
         type:Schema.Types.ObjectId,
-        href:"User",
+        ref:"User",
     },
     to:{
         type:Schema.Types.ObjectId,
-        href:"Listing",
+        // ref:"Listing",
+        ref:"User",
+
+    },
+    product:{
+        type:Schema.Types.ObjectId,
+        ref:"Listing",
 
     },
     createdAt:{
@@ -21,12 +27,9 @@ const reportSchema=new Schema({
     message:{
         type:String,
     },
-    // image:{
-    //     url:String,
-    //     filename:String,
-    // }
+
+    
 })
 
-// const Report=mongoose.model("Report",reportSchema);
-// module.exports=Report;
+
 module.exports=mongoose.model("Report",reportSchema);

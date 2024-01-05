@@ -5,7 +5,7 @@ const Schema=mongoose.Schema;//taki har baar mongoose.schema n likhna pde
 
 // to delete all reviews after deleting a list
 const Review=require("./review.js");
-// const User=require("./user.js");
+const User=require("./user.js");
 
 const listingSchema=new Schema({//Schema==mongoose.Schema
     title:{

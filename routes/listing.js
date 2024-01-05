@@ -224,6 +224,7 @@ router.post("/:id/reports",async(req,res,next)=>{
     console.log(report);
     let from=user._id;
     let to=listing.owner._id;
+    let product=listing._id;
     let message=report.message;
     
 
@@ -232,10 +233,12 @@ router.post("/:id/reports",async(req,res,next)=>{
     console.log("from========"+from);
     console.log("to======"+to);
     console.log("message======="+message);
+    console.log("product===="+product);
 
     const newReport=new Report();
     newReport.from=from;
     newReport.to=to;
+    newReport.product=product;
     newReport.message=message;
     console.log(Report);
 
