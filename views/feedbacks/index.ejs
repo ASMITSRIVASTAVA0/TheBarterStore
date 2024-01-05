@@ -8,6 +8,7 @@
         padding:0.7rem;
         background-color:black;
     }
+    
 </style>
 
 <body>
@@ -41,7 +42,7 @@
               &nbsp;&nbsp;<p style="size:10rem;" class="starability-result" data-rating="<%=feedback.rating%>">
           
 
-              <% if(currUser && currUser._id.equals(feedback.author._id)) { %>
+              <% if(currUser &&( currUser.admin || currUser._id.equals(feedback.author._id))) { %>
 
                 <div class="btns" style="padding:0.5rem;">
                   &nbsp;

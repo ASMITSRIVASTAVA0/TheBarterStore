@@ -1,7 +1,7 @@
 <% layout("/layouts/boilerplate") %>
 
 <div class="row mt-3">
-    <h1 style="text-align: center;">SignUp on Wanderlust</h1>
+    <h1 style="text-align: center; color:crimson;">SignUp on TheBarter Store</h1>
     <div class="col-6 offset-3">
         <form action="/signup" method="POST" class="needs-validation" novalidate>
             <div class="mb-3">
@@ -42,7 +42,7 @@
                 <div class="valid-feedback">Looks Good!</div>
                 <div class="invalid-feedback">Please Enter Password</div>
             </div>
-
+<!-- 
             <div class="mb-3">
                 <label for="profilepic" class="form-label">Profile Pic:</label>
                 <input 
@@ -51,7 +51,7 @@
                 name="profilepic" 
                 placeholder="Upload Image" 
                 type="file">
-            </div>
+            </div> -->
 
             <div class="mb-3">
                 <label for="bio" class="form-label">Mention Your Accomplisment:</label>
@@ -90,10 +90,28 @@
                 <div class="valid-feedback">Thanks for Mentioning Graduation Year!</div>
                 <div class="invalid-feedback">Please enter a valid Graduation Year!</div>
             </div>
+
+            <div class="mb-3">
+                <label for="bio" class="form-label">Admin Key:</label>
+                <input
+                name="key" 
+                id="key" 
+                class="form-control"
+                type="text"
+                placeholder="Only for Admin"
+                >
+
+
+                <div class="valid-feedback">Looks Good!</div>
+                <div class="invalid-feedback">Please Mention About Yourself!</div>
+            </div>
             <br><br>
 
             <button class="btn btn-success">SignUp</button>
+            <br><br>
+            <p>Already have account? <a href="/login" style="text-decoration: none;">Login</a> now</p>
             <br><br><br>
         </form>
+        
     </div>
 </div>

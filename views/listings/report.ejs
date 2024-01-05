@@ -1,0 +1,80 @@
+
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .card li{
+        padding:0.7rem;
+        background-color:black;
+    }
+</style>
+
+<body>
+    <%=listing._id%>
+    
+    <h1 style="color:crimson"class="offset-3">Your Report will be resolved soon!</h1>
+    <br><br>
+    <div class="col-8 offset- container-sm">
+        <form action="/listings/<%=listing._id%>/reports" method="POST" class="needs-validation" novalidate>
+            
+            img
+            
+            <div class="mb-3">
+                <label for="message" class="form-label"><h5>Mention Cause of Report:</h5></label>
+                <textarea
+                name="report[message]"
+                id="message"
+                type="text"
+                class="form-control bg-secondary"
+                cols="30"
+                rows="7"
+                style="color:black; font-size:1.2rem; font-weight:500;"
+                required>sample</textarea>
+    
+                <div class="valid-feedback">We will Soon Resolve Your Problem!</div> 
+                <div class="invalid-feedback">Please Provide The Cause of Report!</div>
+            </div>
+    
+
+
+            
+
+            <button class="btn btn-success"><i class="fa-solid fa-share-from-square"></i> Submit</button>
+        </form>
+        <br><br>
+    </div>
+        
+    
+
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        
+
+        
+
+    
+        

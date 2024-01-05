@@ -19,6 +19,7 @@ passport.use(new LocalStrategy( User.authenticate()))
 */
 
 
+const { boolean } = require("joi");
 const mongoose=require("mongoose");
 const Schema=mongoose.Schema;
 const passportLocalMongoose=require("passport-local-mongoose");
@@ -29,11 +30,11 @@ const userSchema=new Schema({
         type:String,
         required:true
     },
-    profilepic:{
-        url:String,
-        filename:String,
-        // required:true,
-    },
+    // profilepic:{
+    //     url:String,
+    //     filename:String,
+    //     // required:true,
+    // },
     bio:{
         type:String,
         required:true
@@ -41,6 +42,10 @@ const userSchema=new Schema({
     year:{
         type:Number,
         required:true,
+    },
+    admin:{
+        type:Boolean,
+        default:false,
     }
 })
 

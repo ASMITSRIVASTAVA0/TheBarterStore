@@ -26,6 +26,9 @@
 
 // npm i connect-mongo===express-session local storage ke liye jb online dalege to 
 
+// npm i nodemailer
+
+
 // jb database ko initialize terminal me cd/"Desktop"/..../init me index.js command dena
 
 
@@ -80,6 +83,8 @@ const listingRouter=require("./routes/listing.js");
 const reviewRouter=require("./routes/review.js");//ye model h
 const userRouter=require("./routes/user.js");
 const categoryRouter=require("./routes/category.js");
+const filterRouter=require("./routes/filter.js");
+const reportRouter=require("./routes/report.js");
 // ejs-mate k setup
 // ejs-mate se template(boilerplate bna skte hr ejs file k) milte
 const ejsMate=require("ejs-mate");
@@ -98,6 +103,10 @@ app.set("views",path.join(__dirname,"views"));
 // to use delete patch ,etc req
 // to read get req data
 app.use(express.urlencoded({extended:true}));
+
+// from chatgpt
+const bodyParser=require("body-parser");
+app.use(bodyParser.json());
 
 // listing.js ke andar schema btaya aur listing collection bna ke export
 // listings.js me sirf Listing k schema define h
@@ -300,6 +309,16 @@ app.use((req,res,next)=>{
 //     res.send("asmit");
 // })
 app.use("/",userRouter);
+
+// app.get("/listings/filter",async(req,res)=>{
+//     res.send("working well");
+// })
+// app.use("/listings/filter",filterRouter);
+
+app.use("/listings/reports",reportRouter
+// async(req,res)=>{
+    // res.send("report");}
+)
 app.use("/listings/feedback",categoryRouter);
 app.use("/listings",listingRouter);
 
@@ -328,7 +347,7 @@ app.all("*",(req,res,next)=>{
     // req.flash("error","Page not Found!");
     // res.send("page not found");
     // res.render("views/listings/index.ejs");
-    req.flash("error","Page not Found");
+    // req.flash("error","Page not Found");
     res.redirect("/listings");
     // res.render("./views/listings/index.ejs");
     // res.redirect("./public/views/listings/index.ejs");

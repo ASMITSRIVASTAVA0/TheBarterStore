@@ -4,9 +4,15 @@ const User=require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync");
 const passport=require("passport");
 
-const {saveRedirectUrl}=require("../middleware.js");
+const {saveRedirectUrl,isAdmin}=require("../middleware.js");
 
 const userController=require("../controllers/users.js");
+
+
+router.get("/admin",async(req,res)=>{
+    // res.send("asmit");
+    res.render("../views/user/admin.ejs");
+})
 
 router.route("/signup")
 .get(userController.renderSignupForm)
@@ -18,8 +24,9 @@ router.route("/signup")
 router.route("/login")
 .get(userController.renderLoginForm)
 .post(
+    isAdmin,
     // authentication ke pehle redirecturl extract krni
-    saveRedirectUrl,
+    saveRedirectUrl,//my function
     passport.authenticate("local",{
         failureRedirect:"/login",
         failureFlash:true,

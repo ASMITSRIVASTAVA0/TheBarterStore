@@ -11,8 +11,17 @@ module.exports.renderSignupForm=(req,res)=>{
 
 module.exports.signup=async (req,res)=>{
     try{
-        let {username,email,password,profilepic,bio,year}=req.body;
-        const newUser=new User({email,username,profilepic,bio,year});
+        let {username,email,password,profilepic,bio,year,key}=req.body;
+
+        let admin=false;
+        // if(key===process.env.ADMIN-KEY)
+        if(key=="adminkey")
+        // console.log(key+" "+"adminkey");
+        admin=true;
+
+
+
+        const newUser=new User({email,username,profilepic,bio,year,admin});
         const registeredUser=await User.register(newUser,password);
         console.log(registeredUser);
         // chahte ki signup ke sath ke baad phir se login n krna pde seedhe login ho
@@ -20,7 +29,7 @@ module.exports.signup=async (req,res)=>{
                 if(err){
                 return next(err);
             }
-            req.flash("success","Welcome to WanderLust!");
+            req.flash("success","Welcome to TheBarter Store!");
             res.redirect("/listings");
         })
         // req.flash("success","Welcome to WanderLust!");
@@ -38,7 +47,7 @@ module.exports.signup=async (req,res)=>{
 module.exports.login=async (req,res)=>{
     // res.send("welcome");
     console.log("inside authen"),
-    req.flash("success","Welcome Back to Wanderlust");
+    req.flash("success","Welcome Back to TheBarter Store");
     // res.redirect("/listings");
 
     // ek authentication ho jata passport req.session ke extra variable ko delete kr deta so its undedined

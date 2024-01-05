@@ -12,12 +12,15 @@ const wrapAsync =require("../utils/wrapAsync.js");
 const ExpressError=require("../utils/ExpressError.js");
 const {listingSchema,reviewSchema}=require("../schema.js");//Joi k schema
 const Listing=require("../models/listing.js");
+const Report=require("../models/report.js");
 
 // to use loggedin middleware
 const {isLoggedIn,isOwner,validateListing}=require("../middleware.js");
 // const {isOwner}=require("../middleware.js
 
 const listingController=require("../controllers/listings.js");
+
+const sendMail=require("../controllers/sendmail.js");
 
 // to upload img file
 const multer=require("multer");
@@ -39,6 +42,12 @@ router.get("/owner/:id",
     // upload.single("listing[image]"),
     wrapAsync(listingController.renderOwner)
 )
+
+
+
+
+
+
 
 
 router.get("/new",
@@ -176,6 +185,73 @@ router.get("/:id/edit",
     isOwner,
     wrapAsync(listingController.renderEditForm )
 )
+
+
+
+
+router.get("/:id/buy",
+    isLoggedIn,
+    wrapAsync(async(req,res,next)=>{
+    // res.send("buy");
+    let {id}=req.params;
+    let listing=await Listing.findById(id);
+    res.render("../views/listings/buy.ejs",{listing});
+    // res.render("../views/listings/buy.ejs",listing);
+    // res.render("..views/listings/buy.ejs",{id});
+}))
+router.post("/:id/buy",sendMail
+    /*async(req,res)=>{
+    let order=req.body.order;
+    console.log(order);
+    // res.send(order);
+    res.render("../views/listings/confirm.ejs");}*/
+)
+
+
+
+router.get("/:id/reports",async(req,res,next)=>{
+    let {id}=req.params;
+    let listing=await Listing.findById(id);
+    res.render("../views/listings/report.ejs",{listing});
+})
+router.post("/:id/reports",async(req,res,next)=>{
+    // res.send("repost");
+    let {id}=req.params;
+    let listing=await Listing.findById(id);
+    let user=req.user;
+    let report=req.body.report;
+    console.log("user========"+user);
+    console.log(report);
+    let from=user._id;
+    let to=listing.owner._id;
+    let message=report.message;
+    
+
+
+    // let Report=new Report()
+    console.log("from========"+from);
+    console.log("to======"+to);
+    console.log("message======="+message);
+
+    const newReport=new Report();
+    newReport.from=from;
+    newReport.to=to;
+    newReport.message=message;
+    console.log(Report);
+
+    let result=await newReport.save();
+    console.log(result);
+
+    req.flash("success","Reported Successfully, We will Take Required Action Soon!")
+    res.redirect(`/listings/${id}`);
+    // res.render("../views/reports/index.ejs",{user,report,listing});
+    // res.send("user===="+user+" LISTING=="+listing+" REPORT===="+report+" reqbody======"+req.body);
+})
+
+// router.put("/:id/buy/confirm",async(req,res)=>{
+//         res.send("asmit");
+//     }
+// )
 
 // update route 
 // jb edit.ejs form se is route pr put req ayegi

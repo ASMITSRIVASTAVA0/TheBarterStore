@@ -26,24 +26,7 @@
     padding-left:1rem;
     padding-right:1rem;
   }
-  .dropdown-item{
-    padding:0.75rem;
-    padding-right:3rem;
-    color:crimson;
-  }
-  .left-link{
-    text-decoration: none;
-    color:red;
-    opacity: 0.7;
-    font-weight: 700;
-  }
-  .left-link:hover{
-    opacity:1;
-    /* color:crimson; */
-  }
-  .navbar-brand i:hover{
-    color:rgb(183, 8, 43);
-  }
+  
   @media(max-width:650px){
     .left-link{
       opacity: 1;
@@ -76,6 +59,10 @@
           <a style="color:white !important"class="nav-link left-link" href="/listings"><i class="fa-solid fa-earth-americas"></i> All Products</a>
           <a style="color:white !important" class="nav-link left-link" href="/listings/new"><i class="fa-solid fa-plus"></i> Sell Your Product</a>
 
+          <% if( currUser && currUser.admin) { %>
+            <a style="color:white !important"class="nav-link left-link" href="/listings/reports"><i class="fa-solid fa-triangle-exclamation"></i> Reports</a>
+
+          <% } %>
           
           
           <!-- <a class="nav-link" href="#">Pricing</a> -->

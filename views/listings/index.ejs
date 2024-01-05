@@ -42,13 +42,28 @@
             justify-content: space-between;
         }
 
+        /* filter csss */
+        .dropdown-item{
+    /* padding:0.75rem; */
+    /* padding-right:3rem; */
+    /* color:crimson; */
+  }
+
         
             
         @media(max-width:650px)
         {
-            .tax-toggle{
-                display: none;
-            }
+            /* .sell-form{
+                /* display: block; */
+            
+            /* .dropdown-toggle{ */
+                /* display: block; */
+                /* margin-left:7rem; */
+            /* } */
+            /* .top-divs{
+                display: flex;
+                flex-direction:column;
+            } */ 
         }
     </style>
 <body>
@@ -60,16 +75,32 @@
     <br>
         
     <div class="top-divs">
-        <form method="GET" action="/listings/new"> 
-            <button class="btn btn-secondary"><i class="fa-solid fa-share-from-square"></i> Sell Your Product</button>
+        <form class="sell-form"method="GET" action="/listings/new"> 
+            <button class="btn btn-secondary btn-sell"><i class="fa-solid fa-share-from-square"></i> Sell Product</button>
         </form>
-        <div class="tax-toggle">
-            <div class="form-check-reverse form-switch ">
-                <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                <label class="form-check-label" for="flexSwitchCheckDefault">Display Total after Taxes</label>
-            </div>
-              
-        </div>
+      
+    
+    
+        <li class="nav-item dropdown">
+        <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="fa-solid fa-filter"></i> Apply Filter &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;      &nbsp; &nbsp;&nbsp; 
+        </button>
+        <ul class="dropdown-menu dropdown-menu-dark">
+
+        
+            
+            <li style="background-color: black; color:black !important;"><a class="dropdown-item" href="/listings/filter"><h5><i class="fa-solid fa-mountain-city"></i> Books for 1st Year </h5></a></li>
+            <li style="background-color: white;"><a style="color:black;"class="dropdown-item" href="/listings/filter"><h6><i class="fa-solid fa-igloo"></i> Books for 2st Year</h6></a></li>
+            <li style="background-color: black;"><a class="dropdown-item" href="/listings/filter"><h5><i class="fa-solid fa-ship"></i> Books for 3st Year</h5></a></li>
+            <li style="background-color: white;"><a style="color:black;"class="dropdown-item" href="/listings/filter"><h5><i class="fa-solid fa-hill-avalanche"></i> Books for 4st Year</h5></a></li>
+        
+            
+            
+        </ul>
+        </li>
+            
+          
+
     </div>
 
     

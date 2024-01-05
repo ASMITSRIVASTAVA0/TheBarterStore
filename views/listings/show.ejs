@@ -40,9 +40,9 @@
                     <br><br>
                     <!-- btn unhi user ko dikhe jo unke owner -->
                     <!-- agar midware me error to currUser store n hua islliye if m -->
-
+                    
                     <!-- agar curruser logged ho aur -->
-                    <% if(currUser && listing.owner._id.equals(currUser._id)) { %>
+                    <% if(currUser &&( listing.owner._id.equals(currUser._id) || currUser.admin)) { %>
                         <div class="btns">
                             <a href="/listings/<%=listing._id%>/edit" class="btn btn-dark add-btn"><i class="fa-solid fa-pen-nib"></i> Edit</a>
                             &nbsp;&nbsp;&nbsp;&nbsp;
@@ -51,9 +51,15 @@
                             </form>
                 
                         </div>
-            
+                        <br>
+                        
                     <br>
                     <% } %>
+                    <form method="GET" action="/listings/<%=listing._id%>/buy">
+                        <button class="btn btn-success"><i class="fa-solid fa-cart-shopping"></i> Buy Now</button>
+            
+                    </form>
+                    
                    
                 <hr>
                 <% if(currUser) { %>
@@ -146,7 +152,7 @@
                                         <p class="card-text"><%=review.comment%></p>
                                         <!-- to servser static result ofrating -->
                                         
-                                        <% if(currUser && review.author._id.equals(currUser._id)) { %>
+                                        <% if(currUser && (currUser.admin || review.author._id.equals(currUser._id) ) ){ %>
                                             <form 
                                             method="POST" 
                                             action="/listings/<%=listing._id%>/reviews/<%=review._id%>?_method=DELETE">
@@ -178,6 +184,14 @@
                 <!-- <p><%=listing.geometry.coordinates%></p> -->
                 <!-- id=map hi dena hoga -->
                 <div id="map"></div>
+            </div>
+            <br>
+            <div>
+
+                <form method="GET" action="/listings/<%=listing._id%>/reports">
+                    <button class="btn btn-outline-danger">Report</button>
+            
+                </form>
             </div>
             
         </div>
@@ -237,7 +251,7 @@
             .setLngLat(listing.geometry.coordinates)
             .setPopup(
                 new mapboxgl.Popup({offset:25})
-                .setHTML(`<h3 style="color:crimson; font-weight:700;">${listing.location}<h3><p style="color:black; font-size:1rem;">Exact Location provided after booking<p>`)
+                .setHTML(`<h3 style="color:crimson; font-weight:700;">${listing.location}<h3><p style="color:black; font-size:1rem;">Location of The Seller!<p>`)
             
             )
             .addTo(map);

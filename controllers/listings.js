@@ -48,7 +48,7 @@ module.exports.showListing=async (req,res)=>{
 
     if(!listing)
     {
-        req.flash("error","Listing you requested for doesn't exist!");
+        req.flash("error","Product you requested for doesn't exist!");
         res.redirect("/listings");
     }
     // console.log(listing);
@@ -110,7 +110,7 @@ module.exports.createListing=async (req,res,next)=>{
     let savedListing=await newListing.save();
     console.log(savedListing);
     // redirect ke pehle
-    req.flash("success","New Listing Created!");
+    req.flash("success","New Product added!");
 
     res.redirect("/listings");
 }
@@ -122,7 +122,7 @@ module.exports.renderEditForm=async (req,res)=>{
 
     if(!listing)
     {
-        req.flash("error","Listing you requested for edit doesn't exist!");
+        req.flash("error","Product you requested for edit doesn't exist!");
         res.redirect("/listings");
     }
 
@@ -194,7 +194,7 @@ module.exports.updateListing=async (req,res)=>{
     // res.redirect("/listings");
     // show wale page pr redirect kro
     // res.redirect(`listings/${id}`); glt as /listings n likha to /listings/listings/id me jayega
-    req.flash("success","Listing Updated!");
+    req.flash("success","Product Details Updated!");
     res.redirect(`/listings/${id}`);
 
 }
@@ -211,7 +211,7 @@ module.exports.destroyListing=async (req,res)=>{
     let deletedList=await Listing.findByIdAndDelete(id);
     // console.log(deletedList);
 
-    req.flash("success","Listing Deleted!");
+    req.flash("success","Product Deleted!");
     res.redirect("/listings");
 }
 

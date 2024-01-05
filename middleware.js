@@ -31,6 +31,25 @@ module.exports.isLoggedIn=(req,res,next)=>{
     next();
 }
 
+module.exports.isAdmin=async(req,res,next)=>{
+    // console.log("currsure"+req.body.currUser);
+    // console.log(req.body.password);
+    let key=req.body.key;
+    // agar key enter n ki to koi baat nhi
+    if(!key)
+    {
+        return next();
+    }
+    if(key==="adminkey")
+    {
+        req.flash("success","Welcome to Admin");
+        console.log(key);
+        return next();
+    }
+    req.flash("error","You are not the Admin!");
+    res.redirect("/login");
+}
+
 // session se locals me url save kri
 module.exports.saveRedirectUrl=(req,res,next)=>{
     console.log("save midware="+req.session.redirectUrl);
@@ -47,7 +66,7 @@ module.exports.saveRedirectUrl=(req,res,next)=>{
 module.exports.isOwner=async (req,res,next)=>{
     let {id}=req.params;
     let listing=await Listing.findById(id);
-    if(!listing.owner._id.equals(res.locals.currUser._id))
+    if( ! (   listing.owner._id.equals(res.locals.currUser._id)    || res.locals.currUser.admin  )  )
     {
         req.flash("error","You are not the owner of this listing");
         return res.redirect(`/listings/${id}`);
@@ -58,7 +77,7 @@ module.exports.isOwner=async (req,res,next)=>{
 module.exports.isReviewAuthor=async (req,res,next)=>{
     let {id,reviewId}=req.params;
     let review=await Review.findById(reviewId);
-    if(!review.author.equals(res.locals.currUser._id))
+    if(  !    (review.author.equals(res.locals.currUser._id) ||   res.locals.currUser.admin  )  )
     {
         req.flash("error","You are not the author of this review");
         return res.redirect(`/listings/${id}`);
