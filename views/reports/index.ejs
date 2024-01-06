@@ -5,15 +5,21 @@
     flex-direction:row;
     justify-content:space-between;
   }
+  .inside-card div{
+    margin:0.4rem 1rem 0.4rem 1rem;
+  }
 </style>
 <body>
-    <h1>Pending Reports</h1>
-
+    <h1 style="color:gold;">Pending Reports:</h1>
+    <br>
    
 
    
 
    <% for(Report of allReports) { %>
+  
+      <% if (!Report.resolved) { %>
+        
           <p class="d-block-flex gap-3" >
             <button style="padding:0% 30%;" class="btn btn-warning" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample<%=Report._id%>" aria-expanded="false" aria-controls="collapseExample">
                 <h4>Inspect Report</h4>
@@ -114,7 +120,7 @@
                         <!-- <button style="margin:0.7rem 0.5rem;" class="btn btn-primary">view</button> -->
                         </div>
                     </div>
-                    <br>
+                    
 
 
                     
@@ -174,7 +180,7 @@
                         
                       </div>
                     </div>
-                    <br>
+                  
 
 
                     <div class="inside-card">
@@ -232,7 +238,7 @@
                         
                       </div>
                     </div>
-                    <br>
+                    
 
 
                     <div class="inside-card">
@@ -286,68 +292,19 @@
                       
                     </div>
 
-                    <br>
+                    
+                    <!-- take action -->
                     <div class="inside-card">
                       <div>
                         <h5></h5>
                       </div>
                       <div>
-                        <!-- Button trigger modal -->
-<button type="button" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop<%=Report._id%>5">
-  Take Action
-</button>
-
-<!-- Modal -->
-<div class="modal fade" id="staticBackdrop<%=Report._id%>5" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="staticBackdropLabel<%=Report._id%>5"></h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        
-        <div class="inside-card">
-          <div>
-            <p>Delete The Product</p>
-          </div>
-          <div>
-            <!-- <form method="POST" action="/listings/<%=Report.product._id%>?_method=DELETE">
-              <button class="btn btn-danger"><i class="fa-solid fa-trash"></i> Delete</button>
-            </form> -->
-            <form method="POST" action="/listings/<%=Report._id%>/<%=Report.product._id%>?_method=DELETE" >
-              <button class="btn btn-danger">Delete</button>
-            </form>
-            
-          </div>
-          
-        </div>
-        <hr>
-        <div class="inside-card">
-          <div>
-            <p>Block The Seller</p>
-          </div>
-          <div>
-            <form>
-              <button class="btn btn-danger"> &nbsp;Block&nbsp;</button>
-            </form>
-            
-          </div>
-          
-        </div>
-        
-        
-        
+                        
+                          <form method="POST" action="/listings/reports/<%=Report._id%>/<%=Report.product._id%>" >
+                            <button class="btn btn-warning">Delete Product and Resolve</button>
+                          </form>
 
 
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        
-      </div>
-    </div>
-  </div>
-</div>
                       </div>
                     </div>
 
@@ -364,8 +321,309 @@
           <br>
 
     <% } %>
+         
 
-  <h1>Resolved Reports</h1>
+  <% } %>
+  <hr>
+
+  <h1 style="color:rgb(0, 255, 255);">Resolved Reports:</h1>
+  <br>
+
+  <% for(Report of allReports) { %>
+  
+    <% if (Report.resolved) { %>
+        
+        <p class="d-block-flex gap-3" >
+          <button style="padding:0% 30%;" class="btn btn-info" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample<%=Report._id%>" aria-expanded="false" aria-controls="collapseExample">
+              <h4>Inspect Report</h4>
+
+              
+          </button>
+        </p>
+        <div class="collapse" id="collapseExample<%=Report._id%>">
+          <div class="card">
+              <div class="card-header bg-primary">
+                Report Id:<%=Report._id%>
+              </div>
+              <div class="card-body bg-primary-subtle">
+                <blockquote class="blockquote mb-0">
+
+                  <!-- product details -->
+                  <!-- <div class="inside-card">
+                    <div>
+                      <h5>Product Details</h5>
+                    </div>
+                    <div>
+                      -- Scrollable modal --
+                      
+
+                      -- Button to trigger modal --
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scrollableModa
+                        View
+                      </button>
+                      -- Scrollable Modal --
+                      <div class="modal fade" id="scrollableModal1" tabindex="-1" role="dialog" aria-labelledby="scrollableModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                          <div class="modal-content">
+
+
+                            <div class="modal-header">
+                              <h5 style="color:crimson;" class="modal-title" id="scrollableModalLabel1"></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+
+                             
+
+
+                            <div class="modal-body">
+                              <div class="row mt-3" >
+
+                                    
+                                
+                                    <div class="card col-9 offset-1
+                                    listing-card" >
+                                        <img class="show-img"src>" alt="image" style="height:50vh; width:36vh; margin:0;">
+
+
+                                        <div class="card-body bg-body-light">
+                                            <p class="card-text">
+                                                
+                                                -- <form method="GET" action="/listings/owner/{asmitid}">
+                                                    <button class="btn btn-outline-danger">Know About Owner</button>
+                                                </form>
+                                                <br> --
+                                                            
+                                
+                                                < %>
+                                                <br><br>
+                                                Price:&nbsp;&nbsp;&#8377;
+                                                <br>
+                                                <!-- Category: --
+                                                This is fstudents;
+                                                <br>
+                                                Condition:&nbsp;&nbsp;
+                                                <br>
+                                                Location:&nbsp;&nbs
+                                                <br>
+                                                -- Country:--
+
+                                            </p>
+                                          
+                                        </div>
+                                      
+                                    </div>
+
+                              </div>
+                            
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              -- <button type="button" class="btn btn-danger">Take Action</button> --
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      
+                      -- <button style="margin:0.7rem 0.5rem;" class="btn btn-primary">view</button> --
+                      </div>
+                  </div>
+                  
+                -->
+
+
+                  
+                  <div class="inside-card">
+                    <div >
+                      <h5>Report By:</h5>
+                    </div>
+                    <div>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scrollableModal<%=Report._id%>2">
+                        View
+                      </button>
+                      <div class="modal fade" id="scrollableModal<%=Report._id%>2" tabindex="-1" role="dialog" aria-labelledby="scrollableModalLabel" aria-hidden="true">
+
+
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                          <div class="modal-content">
+
+
+                            <div class="modal-header">
+                              <h5 style="color:crimson;" class="modal-title" id="scrollableModalLabel<%=Report._id%>2"></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+
+                            <div class="modal-body">
+                              <div class="card mb-3 offset-1 " style="max-width: 540px;  font-weight: 700; background-color: crimson;">
+                                <div class="row g-0">
+                                  <div class="col-md-4">
+                                    
+                                  </div>
+                                  <div class="col-md-8"style="background-color: black;">
+                                    <div class="card-body " >
+                                      <h5 class="card-title"><h2 style="opacity: 1; font-weight: 900; font-family:cursive; font-size:2rem;"><%=Report.from.username%></h2></h5>
+                                      <hr>
+                                      <p class="card-text"><%=Report.from.bio%></p>
+                                      <p class="card-text"><small class="text-body-secondary"><b>Email:</b><%=Report.from.email%></small></p>
+                                      <p class="card-text"><small class="text-body-secondary"><b>Year of Graduation:</b><%=Report.from.year%></small></p>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+
+                          </div>
+
+                        </div>
+
+
+                      </div>
+                      
+                    </div>
+                  </div>
+                
+
+
+                  <div class="inside-card">
+                    <div >
+                      <h5>Report Against:</h5>
+                    </div>
+                    <div>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scrollableModal<%=Report._id%>3">
+                        View
+                      </button>
+                      <div class="modal fade" id="scrollableModal<%=Report._id%>3" tabindex="-1" role="dialog" aria-labelledby="scrollableModalLabel" aria-hidden="true">
+
+
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                          <div class="modal-content">
+
+
+                            <div class="modal-header">
+                              <h5 style="color:crimson;" class="modal-title" id="scrollableModalLabel<%=Report._id%>3"></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+
+                            <div class="modal-body">
+                              <div class="card mb-3 offset-1 " style="max-width: 540px;  font-weight: 700; background-color: crimson;">
+                                <div class="row g-0">
+                                  <div class="col-md-4">
+                                    
+                                  </div>
+                                  <div class="col-md-8"style="background-color: black;">
+                                    <div class="card-body " >
+                                      <h5 class="card-title"><h2 style="opacity: 1; font-weight: 900; font-family:cursive; font-size:2rem;"><%=Report.to.username%></h2></h5>
+                                      <hr>
+                                      <p class="card-text"><%=Report.to.bio%></p>
+                                      <p class="card-text"><small class="text-body-secondary"><b>Email:</b><%=Report.to.email%></small></p>
+                                      <p class="card-text"><small class="text-body-secondary"><b>Year of Graduation:</b><%=Report.to.year%></small></p>
+                                      
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+
+                          </div>
+
+                        </div>
+
+                      </div>
+                      
+                    </div>
+                  </div>
+                  
+
+
+                  <div class="inside-card">
+                    <div >
+                      <h5>Message:</h5>
+                    </div>
+                    <div>
+                    <!-- Scrollable modal -->
+                      
+
+                      <!-- Button to trigger modal -->
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scrollableModal<%=Report._id%>4">
+                        View
+                      </button>
+                      <!-- Scrollable Modal -->
+                      <div class="modal fade" id="scrollableModal<%=Report._id%>4" tabindex="-1" role="dialog" aria-labelledby="scrollableModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-scrollable" role="document">
+                          <div class="modal-content">
+
+
+                            <div class="modal-header">
+                              <h5 style="color:crimson;" class="modal-title" id="scrollableModalLabel<%=Report._id%>4"></h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+
+                            
+
+
+                            <div class="modal-body">
+                              <p><%=Report.message%></p>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <!-- <button type="button" class="btn btn-danger">Take Action</button> -->
+                            </div>
+
+
+                          </div>
+
+
+                        </div>
+                      </div>
+
+                    </div>
+
+
+
+                    
+                    
+                  </div>
+
+              
+
+                  
+
+                  <footer class="blockquote-footer"><br>Resolved On: <cite title="Source Title"><%= Report.createdAt%></cite></footer>
+                </blockquote>
+              </div>
+          </div>
+            
+        </div>
+
+        <br>
+
+  <% } %>
+       
+
+<% } %>
+
 
   
 

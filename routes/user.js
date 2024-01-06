@@ -4,7 +4,7 @@ const User=require("../models/user.js");
 const wrapAsync = require("../utils/wrapAsync");
 const passport=require("passport");
 
-const {saveRedirectUrl,isAdmin}=require("../middleware.js");
+const {saveRedirectUrl,isAdmin,isBlocked}=require("../middleware.js");
 
 const userController=require("../controllers/users.js");
 
@@ -25,6 +25,7 @@ router.route("/login")
 .get(userController.renderLoginForm)
 .post(
     isAdmin,
+    // isBlocked,
     // authentication ke pehle redirecturl extract krni
     saveRedirectUrl,//my function
     passport.authenticate("local",{

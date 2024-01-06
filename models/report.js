@@ -27,6 +27,10 @@ const reportSchema=new Schema({
     message:{
         type:String,
     },
+    resolved:{
+        type:Boolean,
+        default:false,
+    }
 
     
 })
