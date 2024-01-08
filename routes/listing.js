@@ -13,6 +13,7 @@ const ExpressError=require("../utils/ExpressError.js");
 const {listingSchema,reviewSchema}=require("../schema.js");//Joi k schema
 const Listing=require("../models/listing.js");
 const Report=require("../models/report.js");
+const Message=require("../models/msg.js");
 
 // to use loggedin middleware
 const {isLoggedIn,isOwner,validateListing}=require("../middleware.js");
@@ -43,6 +44,19 @@ router.get("/owner/:id",
     wrapAsync(listingController.renderOwner)
 )
 
+// user wala
+router.get("/inbox",
+    isLoggedIn,
+    async(req,res)=>{
+    let user=req.user;
+    let allMessage=await Message.find({to:user._id})
+    .populate("from")
+    .populate("to")
+    .populate("product");
+    
+    // res.render("../views/reports/inbox.ejs",{allMessage});
+    res.render("../views/listings/userbox.ejs",{allMessage});
+})
 
 
 
@@ -199,12 +213,34 @@ router.get("/:id/buy",
     // res.render("../views/listings/buy.ejs",listing);
     // res.render("..views/listings/buy.ejs",{id});
 }))
-router.post("/:id/buy",sendMail
-    /*async(req,res)=>{
-    let order=req.body.order;
-    console.log(order);
-    // res.send(order);
-    res.render("../views/listings/confirm.ejs");}*/
+router.post("/:id/buy",
+    // sendMail
+    async(req,res)=>{
+    let {id}=req.params;
+    let product=await Listing.findById(id);
+    let address=req.body.info.address;
+    let contact=req.body.info.contact;
+    let message=req.body.info.message;
+    let from=req.user;
+    let to=product.owner;
+
+    const newMessage=await Message({});
+    newMessage.from=from;
+    newMessage.to=to;
+    newMessage.message=message;
+    newMessage.product=product;
+    newMessage.address=address;
+    newMessage.contact=contact;
+    newMessage.replied=false;
+
+    console.log(newMessage);
+    // let result=await newMessage.save();
+
+
+    // res.send(result);
+    req.flash("success","Owner of The Product will contact you soon,Thankyou!");
+    res.redirect(`/listings/${id}`);
+}
 )
 
 

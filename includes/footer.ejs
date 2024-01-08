@@ -30,11 +30,62 @@
         </div>
         <div class="f-info-brand" style="color:black;"><b>Wander Lust Private Limited</b></div>
         <div class="f-info-links">
-            <a href="#"><b style="color:crimson">Contact Admin</b></a>
+
+          <button type="button" class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#exampleModal2" data-bs-whatever="@mdo">Contact Admin</button>
+
+
+          <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+
+
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" style="color:dodgerblue;" id="exampleModalLabel"><b>Send Message To Admin</b></h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+              <form method="POST" action="/listings/reports/inbox">
+
+                    <div class="modal-body">
+                      <!-- <form> -->
+                        <!-- <div class="mb-3">
+                          <label for="recipient-name" class="col-form-label">Recipient:</label>
+                          <input type="text" class="form-control" id="recipient-name">
+                        </div> -->
+                        <div class="mb-3">
+                          <!-- <label for="message-text" class="col-form-label">Message:</label> -->
+                          <textarea name="message" class="form-control"  rows="5" id="message-text">sample message</textarea>
+                        </div>
+                      <!-- </form> -->
+                    </div>
+
+                    
+
+                    <div class="modal-footer">
+                    
+                      <button class="btn btn-primary">Send message</button>
+                    </div>
+
+              </form>
+
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+
+
+
+            <!-- <a href="#"><b style="color:crimson">Contact Admin</b></a> -->
         </div>
         <button type="button" class="btn about-btn" style=" height:2rem;"data-bs-toggle="modal" data-bs-target="#exampleModal">
             About Us
           </button>
+        
           
           <!-- Modal -->
           <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -55,6 +106,8 @@
               </div>
             </div>
           </div>
+          
           <br><Br>
     </div>
+   
 </footer>

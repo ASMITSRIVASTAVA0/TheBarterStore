@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wander Lust</title>
+    <title>TheBarter Store</title>
     <link rel="icon" href="https://media.istockphoto.com/id/1342323374/vector/compass-icon-vector-stock-illustration-design-template-vector-eps-10.jpg?s=612x612&w=0&k=20&c=HuSUDBS2mWD_75fpJthLnzKG8XgaaIlQVATT8gMFMSo=" type="image/icon type">
     <!-- <link rel="stylesheet" href="/public/css/style.css"> -->
     <!-- public aur view folder connect is liye /public/css... nhi -->
@@ -97,7 +97,27 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
+    <!-- footer k modal -->
+    <script>
+        const exampleModal = document.getElementById('exampleModal')
+if (exampleModal) {
+  exampleModal.addEventListener('show.bs.modal', event => {
+    // Button that triggered the modal
+    const button = event.relatedTarget
+    // Extract info from data-bs-* attributes
+    const recipient = button.getAttribute('data-bs-whatever')
+    // If necessary, you could initiate an Ajax request here
+    // and then do the updating in a callback.
 
+    // Update the modal's content.
+    const modalTitle = exampleModal.querySelector('.modal-title')
+    const modalBodyInput = exampleModal.querySelector('.modal-body input')
+
+    modalTitle.textContent = `New message to ${recipient}`
+    modalBodyInput.value = recipient
+  })
+}
+    </script>
 
 </body>
 </html>

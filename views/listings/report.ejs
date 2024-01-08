@@ -9,14 +9,14 @@
 </style>
 
 <body>
-    <%=listing._id%>
+
     
-    <h1 style="color:crimson"class="offset-3">Your Report will be resolved soon!</h1>
+    <h1 style="color:crimson"class="offset-2">Your Report will be resolved soon!</h1>
     <br><br>
     <div class="col-8 offset- container-sm">
         <form action="/listings/<%=listing._id%>/reports" method="POST" class="needs-validation" novalidate>
             
-            img
+            
             
             <div class="mb-3">
                 <label for="message" class="form-label"><h5>Mention Cause of Report:</h5></label>
@@ -28,7 +28,7 @@
                 cols="30"
                 rows="7"
                 style="color:black; font-size:1.2rem; font-weight:500;"
-                required>sample</textarea>
+                required></textarea>
     
                 <div class="valid-feedback">We will Soon Resolve Your Problem!</div> 
                 <div class="invalid-feedback">Please Provide The Cause of Report!</div>

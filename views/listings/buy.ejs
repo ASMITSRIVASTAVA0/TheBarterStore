@@ -20,7 +20,7 @@
             <div class="mb-3">
                 <label for="name" class="form-label"><h5>Name:</h5></label>
                 <input 
-                name="order[name]"
+                name=""
                 id="name"
                 type="text"
                 class="form-control bg-secondary"
@@ -35,7 +35,7 @@
             <div class="mb-3">
                 <label for="email" class="form-label"><h5>Email:</h5></label>
                 <input 
-                name="order[email]"
+                name=""
                 id="name"
                 type="text"
                 class="form-control bg-secondary"
@@ -49,12 +49,13 @@
             <div class="mb-3">
                 <label for="contact" class="form-label"><h5>Contact No:</h5></label>
                 <input 
-                name="order[contact]"
+                name="info[contact]"
                 id="name"
                 type="text"
                 class="form-control bg-secondary"
                 style="color:black; font-size:1.2rem; font-weight:500;"
                 placeholder="Enter Contact No."
+                
                 required>
 
                 <div class="valid-feedback">Looks Good!</div>
@@ -63,27 +64,30 @@
             <div class="mb-3">
                 <label for="address" class="form-label"><h5>Address:</h5></label>
                 <input 
-                name="order[address]"
+                
+                name="info[address]"
                 id="address"
                 type="text"
                 class="form-control bg-secondary"
                 style="color:black; font-size:1.2rem; font-weight:500;"
                 placeholder="Enter Address"
-
+                
                 required>
 
                 <div class="valid-feedback">Looks Good!</div>
                 <div class="invalid-feedback">Please provide your good name!</div>
             </div>
             <div class="mb-3">
-                <label for="username" class="form-label"><h5>Custom Message:</h5></label>
+                <label for="username" class="form-label"><h5>Message:</h5></label>
                 <textarea
-                name="order[message]"
+                
+                name="info[message]"
                 id="message"
                 type="text"
                 class="form-control bg-secondary"
                 cols="30"
                 rows="7"
+
                 placeholder="Send Customize Message to Seller"
                 style="color:black; font-size:1.2rem; font-weight:500;"
                 required></textarea>

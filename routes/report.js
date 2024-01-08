@@ -4,6 +4,8 @@ const router=express.Router({mergeParams:true});
 
 const Report=require("../models/report.js");
 const Listing=require("../models/listing.js");
+const Message=require("../models/msg.js");
+const User=require("../models/user.js");
 // const app=require("express");
 // const router=app.Router;
 
@@ -31,6 +33,36 @@ router.get("/",async(req,res)=>{
     // let Report=await Report.findById("6597c2294c3ce8b9c8750d67");
     // Report.populate("from").populate("to").populate("product");
     // res.render("../views/reports/index.ejs",{Report});
+})
+router.get("/inbox",async(req,res)=>{
+    let user=req.user;
+    let allMessage=await Message.find({to:user._id})
+    .populate("from")
+    .populate("to")
+    .populate("product");
+    
+    res.render("../views/reports/inbox.ejs",{allMessage});
+})
+router.post("/inbox",async(req,res)=>{
+    let message=req.body.message;
+    // let user=req.currUser;
+    let user=req.user;
+    // ye id database se nikali
+    let admin=await User.findById("6596bf9dc2cee3a7893ed3dc");
+
+    let newMessage=new Message();
+    newMessage.message=message;
+    newMessage.from=user;
+    // finding admin through id
+    newMessage.to=admin;
+    // newMessage.product= kux nhi 
+
+    let result= await newMessage.save();
+    
+    console.log(result);
+    // res.send(result);
+    req.flash("success","Message Send Successfully, Admin will Contact you soon!");
+    res.redirect("/listings");
 })
 
 router.post("/:id",async(req,res)=>{

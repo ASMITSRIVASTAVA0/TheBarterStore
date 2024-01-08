@@ -1,0 +1,55 @@
+<% layout("/layouts/boilerplate.ejs") %>
+<style>
+  .card{
+    margin:1rem;
+  }
+</style>
+<body>
+    
+    <h1 style="color:crimson;">Inbox <i class="fa-brands fa-facebook-messenger"></i></h1>
+    <br>
+    <div class="row">
+
+      <% for(Message of allMessage) { %>
+
+        <div class="col-sm-3 col-md-4 mb-4 mb-sm-0">
+
+
+          <div class="card bg-light" style="color:black;">
+            <div class="card-body">
+              <!-- <h4 style="color:crimson" card-title">@</h4> -->
+              <!-- <h5 style="color:black" class="card-text">&nbs</h5> -->
+              <h4>From:<%=Message.from.username%></h4>
+              <h5>Message:<%=Message.message%></h5>
+              <h5>Product:<%=Message.product.title%></h5>
+              <h5>Address:<%=Message.address%></h5>
+              <h5>Contact No.<%=Message.contact%></h5>
+              
+              <p>@<%=Message.from.username%> is interested in buying your product @<%=Message.product.title%>, 
+                Information of buyer is provided above, if interested in selling your product,
+            kindly contact @<%=Message.from.username%></p>
+              <!-- <a style="margin:0.5rem;" href="#" class="btn btn-primary">Reply</a> -->
+              <p style="opacity:0.7;">Send on:<%=Message.createdAt%></p>
+
+            </div>
+          </div>
+
+          
+
+        </div>
+        
+
+      <% } %>
+
+
+         
+
+
+    </div> 
+
+        
+
+        
+  
+
+</body>

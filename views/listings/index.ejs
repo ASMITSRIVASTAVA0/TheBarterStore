@@ -43,11 +43,7 @@
         }
 
         /* filter csss */
-        .dropdown-item{
-    /* padding:0.75rem; */
-    /* padding-right:3rem; */
-    /* color:crimson; */
-  }
+        
 
         
             
@@ -64,6 +60,10 @@
                 display: flex;
                 flex-direction:column;
             } */ 
+            .main-heading h1{
+                font-size:2.5rem !important;
+
+            }
         }
     </style>
 <body>
@@ -71,19 +71,50 @@
 
     
     <!-- %> -->
-    <h1 style="color:crimson; font-size:3rem;">TheBarter Store</h1>
-    <br>
+    <div style="display: flex; flex-direction: row; justify-content:space-between;">
+        <div class="main-heading">
+            <h1  style="color:crimson; font-size:3rem;">TheBarter Store</h1>
+        </div>
+        <div>
+            <% if(  currUser.admin) { %>
+            <form method="GET" action="/listings/reports/inbox">
+                <!-- <button class="btn btn-success">Inbox<i class="fa-brands fa-facebook-messenger"></i></button> -->
+                <button  class="btn btn-primary position-relative">
+                    Inbox
+                    <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                      <%=msgCount%> unread
+                      <span class="visually-hidden">unread messages</span>
+                    </span>
+                  </button>
+            </form>
+
+            <%  } %>
+
+            <% if( ! currUser.admin) { %>
+                <form method="GET" action="/listings/inbox">
+                    <button  class="btn btn-primary position-relative">
+                        Inbox
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                          <%=msgCount%> unread
+                          <span class="visually-hidden">unread messages</span>
+                        </span>
+                      </button>
+                </form>
+            <% } %>
+        </div>
+    </div>
+     <br>
         
     <div class="top-divs">
         <form class="sell-form"method="GET" action="/listings/new"> 
-            <button class="btn btn-secondary btn-sell"><i class="fa-solid fa-share-from-square"></i> Sell Product</button>
+            <button class="btn btn-secondary btn-sell"><i class="fa-solid fa-share-from-square"></i> Sell Item</button>
         </form>
       
     
     
         <li class="nav-item dropdown">
         <button class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <i class="fa-solid fa-filter"></i> Apply Filter &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;      &nbsp; &nbsp;&nbsp; 
+            <i class="fa-solid fa-filter"></i> Apply Filter       &nbsp; &nbsp;&nbsp; 
         </button>
         <ul class="dropdown-menu dropdown-menu-dark">
 

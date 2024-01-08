@@ -1,7 +1,8 @@
 // is callbacks store kro
 const Listing=require("../models/listing");
 const User=require("../models/user.js");
-
+const Report=require("../models/report.js");
+const Message=require("../models/msg.js");
 
 // const mbxTilesets = require('@mapbox/mapbox-sdk/services/tilesets');
 
@@ -14,9 +15,12 @@ const geocodingClient=mbxGeocoding({accessToken:mapToken});
 module.exports.index= async (req,res)=>{
     // basically init/data.js ko allListings me dala
     const allListings=await Listing.find({});
+    const allMessage=await Message.find({to:req.user._id});
+    const msgCount=allMessage.length;
+    console.log(msgCount);
     // res.send(allList);
     // chuki views join path h pr listing nhi to/listings/index.js
-    res.render("./listings/index.ejs",{allListings});
+    res.render("./listings/index.ejs",{allListings,msgCount});//,{msgCount});
     // res.render
     // res.render("/listings/index.ejs",{allListings});
 
@@ -208,8 +212,12 @@ module.exports.destroyListing=async (req,res)=>{
     //     req.flash("error","You don't have permission to Delete!");
     //     return res.redirect("/listings");
     // }
+    let  allReport=await Report.find({product:id}).deleteMany();
+    // let report=await Report.findOneAndDelete({product:id});
+    // let result=await report.delete();
+    console.log("alldeleted report:"+allReport);
     let deletedList=await Listing.findByIdAndDelete(id);
-    // console.log(deletedList);
+    console.log(deletedList);
 
     req.flash("success","Product Deleted!");
     res.redirect("/listings");
