@@ -26,7 +26,8 @@ const listingSchema=new Schema({//Schema==mongoose.Schema
         
         // //jo img k url likha vahi dikhao
         url:String,
-        filename:String
+        filename:String,
+        
         
     },
     price:Number,

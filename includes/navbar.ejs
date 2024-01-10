@@ -1,9 +1,4 @@
-<!-- boilerplate.ejs ka nav yaha bnaya -->
-<!-- bootstrap se copy -->
 
-<!-- font awesome me jake icon lo -->
-<!-- to font awesome k cdn link kro -->
-<!-- cdn k link boiler plate me link kro -->
 
 <style>
   .btn-search{
@@ -34,14 +29,9 @@
   }
 </style>
 
-<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary"> -->
-
-<!-- border-bottom ======bootstrap ki class to add it -->
-<!-- taki navbar stick rhe top me =====sticky-top -->
 <nav style="background-color:rgb(0, 0, 0);" class="navbar navbar-expand-md        border-bottom           sticky-top">
     <div class="container-fluid">
 
-      <!-- <a class="navbar-brand" href="#">Navbar</a> -->
       <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass fa-shake"></i></a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -50,11 +40,6 @@
       
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
         <div class="navbar-nav">
-          <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
-          <!-- <a class="nav-link " href="/">Home</a> -->
-          <!-- <a class="nav-link" href="#">Features</a> -->
-
-          <!-- active likhne se text thoda dark dikhta -->
          
           <a style="color:white !important"class="nav-link left-link" href="/listings"><i class="fa-solid fa-earth-americas"></i> All Products</a>
           <a style="color:white !important" class="nav-link left-link" href="/listings/new"><i class="fa-solid fa-plus"></i> Sell Your Product</a>
@@ -65,61 +50,32 @@
           <% } %>
           
           
-          <!-- <a class="nav-link" href="#">Pricing</a> -->
-                    <!-- <a class="nav-link disabled" aria-disabled="true">Disabled</a> -->
-
+          
         </div>
 
         
 
 
-        <!-- ms-auto===margin from start to be auto -->
         <div class="navbar-nav ms-auto">
          
 
-          <!-- agar user logged in to sirf logout dikhe else signup and login dikhe -->
           <% if(!currUser) { %>
             <a style="color:white !important" class="nav-link" href="/signup"><i class="fa-sharp fa-solid fa-user-plus fa-bounce"></i><b>Sign Up</b></a>
             <a  style="color:white !important"class="nav-link" href="/login"><i class="fa-solid fa-right-to-bracket fa-beat"></i><b> Log In</b></a>
           <% } %>
-            <!-- req.user cant be access directly -->
+          
           <% if(currUser) { %>
             <a  style="color:white !important"class="nav-link" href="/logout"><b>Log Out </b><i class="fa-solid fa-right-from-bracket fa-fade"></i></a>
           <% } %>
 
       
-          <!-- <button style=" height:2rem; width:8rem;" onclick="changeMode2()" id="dark-mode-btn" class="light-btn-bg">Light Mode</button> -->
-                    <button class="btn btn-feedback btn-light">
-            <!-- Give FeedBack -->
+           <button class="btn btn-feedback btn-light">
+            
             <a href="/listings/feedback" style="text-decoration: none; color:black; font-size:1.2rem;"><i class="fa-solid fa-comments"></i> Give Feedback</a>
 
           </button>
           
-          <!-- <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
-            <ul class="navbar-nav">
-              <li class="nav-item dropdown">
-                <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                  <i class="fa-solid fa-filter"></i> Give FeedBack &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp;      &nbsp; &nbsp;&nbsp; 
-                </button>
-                <ul class="dropdown-menu dropdown-menu-dark">
-
-                  <li><a class="dropdown-item" href=""><h4><i class="fa-solid fa-mountain-city"></i>&nbsp;Price</h4></a></li>
-                  
-                  <li><a class="dropdown-item" href="/listings/category/Iconic Cities"><h4><i class="fa-solid fa-mountain-city"></i> Condition</h4></a></li>
-                  <li><a class="dropdown-item" href="/listings/category/Dome"><h4><i class="fa-solid fa-igloo"></i> Dome</h4></a></li>
-                  <li><a class="dropdown-item" href="/listings/category/Boats"><h4><i class="fa-solid fa-ship"></i> Boats</h4></a></li>
-                  <li><a class="dropdown-item" href="/listings/category/Hill Stations"><h4><i class="fa-solid fa-hill-avalanche"></i> Hill Stations</h4></a></li>
-                  <li><a class="dropdown-item" href="/listings/category/Castles"><h4><i class="fa-brands fa-fort-awesome"></i> Castles</h4></a></li>
-                  <li><a class="dropdown-item" href="/listings/category/Camping"><h4><i class="fa-solid fa-campground"></i> Camping</h4></a></li>
-                  <li><a class="dropdown-item" href="/listings/category/Farms"><h4><i class="fa-solid fa-cow"></i> Farms</h4></a></li>
-                  <li><a class="dropdown-item" href="/listings/category/Arctic"><h4><i class="fa-regular fa-snowflake"></i> Arctic</h4></a></li>
-                  
-                  
-                </ul>
-              </li>
-            </ul>
-          </div>
-           -->
+          
 
         </div>
       </div>

@@ -15,8 +15,14 @@ const geocodingClient=mbxGeocoding({accessToken:mapToken});
 module.exports.index= async (req,res)=>{
     // basically init/data.js ko allListings me dala
     const allListings=await Listing.find({});
+    let msgCount=0;
+    // const msgCount=0;
+    if(req.user){
     const allMessage=await Message.find({to:req.user._id});
-    const msgCount=allMessage.length;
+    msgCount=allMessage.length;
+    }
+    // else
+    // {const msgCount=0;}
     console.log(msgCount);
     // res.send(allList);
     // chuki views join path h pr listing nhi to/listings/index.js
@@ -108,7 +114,10 @@ module.exports.createListing=async (req,res,next)=>{
 
     newListing.owner=req.user._id;
     newListing.image={url,filename};
-
+    // if( ! newListing.image)
+    // newListing.image.url="../public/views/pics/book.png";
+    let imgurl=newListing.image.url;
+    // let type=await checkFileType();
     newListing.geometry=result.body.features[0].geometry;
 
     let savedListing=await newListing.save();
