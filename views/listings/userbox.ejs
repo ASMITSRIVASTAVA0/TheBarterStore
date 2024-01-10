@@ -12,24 +12,25 @@
 
       <% for(Message of allMessage) { %>
 
-        <div class="col-sm-3 col-md-4 mb-4 mb-sm-0">
+        <!-- <div class="col-sm-3 col-md-6 mb- mb-sm-0"> -->
+          <div>
 
 
-          <div class="card bg-light" style="color:black;">
-            <div class="card-body">
+          <div class="card bg-light border-warning" style="color:black; padding:0.4rem;">
+            <div class="card-body" style="padding:1rem;">
               <!-- <h4 style="color:crimson" card-title">@</h4> -->
               <!-- <h5 style="color:black" class="card-text">&nbs</h5> -->
-              <h4>From:<%=Message.from.username%></h4>
+              <h3 style="color:rgb(0, 13, 255);">@<%=Message.from.username%></h3>
               <h5>Message:<%=Message.message%></h5>
               <h5>Product:<%=Message.product.title%></h5>
               <h5>Address:<%=Message.address%></h5>
               <h5>Contact No.<%=Message.contact%></h5>
               
-              <p>@<%=Message.from.username%> is interested in buying your product @<%=Message.product.title%>, 
+              <b style="color:crimson;">@<%=Message.from.username%> is interested in buying your product @<%=Message.product.title%>, 
                 Information of buyer is provided above, if interested in selling your product,
-            kindly contact @<%=Message.from.username%></p>
+            kindly contact @<%=Message.from.username%></b>
               <!-- <a style="margin:0.5rem;" href="#" class="btn btn-primary">Reply</a> -->
-              <p style="opacity:0.7;">Send on:<%=Message.createdAt%></p>
+              <p style="opacity:0.7;">Send on:<%=Message.createdAt.toLocaleString().split(", ")[0]%></p>
 
             </div>
           </div>
