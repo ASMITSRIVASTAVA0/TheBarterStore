@@ -49,10 +49,12 @@ router.get("/inbox",
     isLoggedIn,
     async(req,res)=>{
     let user=req.user;
+    console.log(user);
     let allMessage=await Message.find({to:user._id})
     .populate("from")
     .populate("to")
     .populate("product");
+    console.log(allMessage);
     
     // res.render("../views/reports/inbox.ejs",{allMessage});
     res.render("../views/listings/userbox.ejs",{allMessage});
@@ -234,7 +236,7 @@ router.post("/:id/buy",
     newMessage.replied=false;
 
     console.log(newMessage);
-    // let result=await newMessage.save();
+    let result=await newMessage.save();
 
 
     // res.send(result);

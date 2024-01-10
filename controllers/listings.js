@@ -224,7 +224,9 @@ module.exports.destroyListing=async (req,res)=>{
     let  allReport=await Report.find({product:id}).deleteMany();
     // let report=await Report.findOneAndDelete({product:id});
     // let result=await report.delete();
+    let allMessage=await Message.find({product:id}).deleteMany();
     console.log("alldeleted report:"+allReport);
+    console.log("all message delete="+allMessage);
     let deletedList=await Listing.findByIdAndDelete(id);
     console.log(deletedList);
 

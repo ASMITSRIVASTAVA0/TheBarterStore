@@ -12,14 +12,19 @@
 
       <% for(Message of allMessage) { %>
 
-        <div class="col-sm-3 col-md-4 mb-4 mb-sm-0">
-
+        <!-- <div class="col-sm-3 col-md-4 mb-4 mb-sm-0"> -->
+          <!-- <div class="offset-3" style="display:flex; flex-wrap:wrap;"> -->
+            <div style="width:60vh;">
 
           <div class="card bg-light">
             <div class="card-body">
               <h4 style="color:crimson" card-title">@<%=Message.from.username%></h4>
               <h5 style="color:black" class="card-text">&nbsp; <%=Message.message%></h5>
               <a style="margin:0.5rem;" href="#" class="btn btn-primary">Reply</a>
+
+
+
+          
             </div>
           </div>
 
