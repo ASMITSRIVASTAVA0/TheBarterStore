@@ -79,12 +79,13 @@
             <% if( currUser && currUser.admin) { %>
             <form method="GET" action="/listings/reports/inbox">
                 <!-- <button class="btn btn-success">Inbox<i class="fa-brands fa-facebook-messenger"></i></button> -->
-                <button  class="btn btn-primary position-relative">
-                    Inbox
+                <button style="margin-right:1rem;" class="btn btn-primary position-relative">
+                    
                     <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                      <%=msgCount%> unread
+                      <%=msgCount%>+
                       <span class="visually-hidden">unread messages</span>
                     </span>
+                    Inbox
                   </button>
             </form>
 
@@ -93,11 +94,12 @@
             <% if( currUser && ! currUser.admin) { %>
                 <form method="GET" action="/listings/inbox">
                     <button  class="btn btn-primary position-relative">
-                        Inbox
+                        
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                          <%=msgCount%> unread
+                          <%=msgCount%>+
                           <span class="visually-hidden">unread messages</span>
                         </span>
+                        Inbox
                       </button>
                 </form>
             <% } %>

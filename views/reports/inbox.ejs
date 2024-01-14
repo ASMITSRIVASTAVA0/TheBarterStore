@@ -3,6 +3,13 @@
   .card{
     margin:1rem;
   }
+  .outer-div{
+    display: flex;
+    flex-direction:row;
+  }
+  .outer-div .inner-div{
+    margin:0.5rem;
+  }
 </style>
 <body>
     
@@ -12,6 +19,8 @@
 
       <% for(Message of allMessage) { %>
 
+        
+
         <!-- <div class="col-sm-3 col-md-4 mb-4 mb-sm-0"> -->
           <!-- <div class="offset-3" style="display:flex; flex-wrap:wrap;"> -->
             <div style="width:60vh;">
@@ -20,7 +29,72 @@
             <div class="card-body">
               <h4 style="color:crimson" card-title">@<%=Message.from.username%></h4>
               <h5 style="color:black" class="card-text">&nbsp; <%=Message.message%></h5>
-              <a style="margin:0.5rem;" href="#" class="btn btn-primary">Reply</a>
+              
+            <div class="outer-div" >
+
+              <div class="inner-div">
+              <% if(Message.replied==false) { %>
+
+              <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal<%=Message._id%>" data-bs-whatever="@mdo">Reply</button>
+
+
+              <div class="modal fade" id="exampleModal<%=Message._id%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+    
+    
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" style="color:dodgerblue;" id="exampleModalLabel<%=Message._id%>"><b>Send Message To @<%=Message.from.username%></b></h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                  <!-- <form method="POST" action="#"> -->
+                    <form method="POST"action="/listings/reports/msg/<%=Message._id%>" >
+                          
+    
+                        <div class="modal-body">
+                          <div class="mb-3">
+                              <textarea name="message" class="form-control"  rows="5" id="message-text"><%=Message.message%></textarea>
+                            </div>
+                           </div>
+    
+                        
+    
+                        <div class="modal-footer">
+                          <!-- <form method="GET"action="/listings/reports/msg/<%=Message._id%>" > -->
+                            <button  class="btn btn-primary" >Reply</button>
+                          <!-- </form> -->
+                          <!-- <button class="btn btn-primary">Send message</button> -->
+                        </div>
+    
+                  </form>
+    
+                  </div>
+                </div>
+              </div>
+
+
+              
+              
+              <% } %>
+
+            
+
+              <% if(Message.replied==true) { %>
+            
+                <!-- <form method="GET"action="/listings/reports/msg/" > -->
+                  <button  class=" disabled btn btn-warning" >Replied</button>
+                <!-- </form> -->
+              <% } %>
+
+            </div>
+
+              <div class="inner-div">
+              <form method="POST" action="/listings/reports/msg/<%=Message._id%>?_method=DELETE">
+                <button class="btn btn-danger" >Delete</button>
+              </form>
+            </div>
+            </div>
+              
 
 
 

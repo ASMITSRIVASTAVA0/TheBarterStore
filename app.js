@@ -85,6 +85,7 @@ const userRouter=require("./routes/user.js");
 const categoryRouter=require("./routes/category.js");
 const filterRouter=require("./routes/filter.js");
 const reportRouter=require("./routes/report.js");
+const msgRouter=require("./routes/msg.js");
 // ejs-mate k setup
 // ejs-mate se template(boilerplate bna skte hr ejs file k) milte
 const ejsMate=require("ejs-mate");
@@ -128,7 +129,6 @@ app.use(express.static(path.join(__dirname,"/includes")));
 // pr agar hopscotch se glt info aai to uske liye joi
 const {listingSchema,reviewSchema}=require("./schema.js");
 const { stringify } = require("querystring");
-const { resolveSoa } = require("dns");
 // const {listingSchema}=require("./schema.js");
 
 // make h func to perform work of Joi check req.body when data se send from hopscotch/postman
@@ -309,6 +309,11 @@ app.use((req,res,next)=>{
 //     res.send("asmit");
 // })
 app.use("/",userRouter);
+app.use("/listings/reports/msg",msgRouter
+    // async(req,res)=>{
+    // res.send("reply");
+
+)
 
 // app.get("/listings/filter",async(req,res)=>{
 //     res.send("working well");
@@ -319,6 +324,7 @@ app.use("/listings/reports",reportRouter
 // async(req,res)=>{
     // res.send("report");}
 )
+
 app.use("/listings/feedback",categoryRouter);
 app.use("/listings",listingRouter);
 

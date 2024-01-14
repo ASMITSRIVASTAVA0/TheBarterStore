@@ -43,6 +43,23 @@ router.get("/inbox",async(req,res)=>{
     
     res.render("../views/reports/inbox.ejs",{allMessage});
 })
+router.delete("/product/delete/:id",async(req,res)=>{
+    let {id}=req.params;
+    let listing=await Listing.findByIdAndDelete(id);
+    console.log(listing);
+    console.log(id);
+
+    // let allReports=await Report.find({product:id}).deleteMany();
+    let allReports=await Report.findById({product:id});
+    for(Report of allReports)
+    {
+        Report.resolved=true;
+    }
+    
+    req.flash("success","Product Deleted Successfully");
+    res.redirect("/listings/reports");
+    // res.send(listing);
+})
 router.post("/inbox",async(req,res)=>{
     let message=req.body.message;
     // let user=req.currUser;
@@ -86,13 +103,13 @@ router.post("/:id/:productid",async(req,res)=>{
 
 
 
-    let listing=await Listing.findByIdAndDelete(productid);
+    // let listing=await Listing.findByIdAndDelete(productid);
     let report=await Report.findById(id);
     report.resolved=true;
     let result=await report.save();
     console.log(result);
 
-    console.log(listing);
+    // console.log(listing);
     // console.log(report);
     res.redirect("/listings/reports");
     // res.send("delete");

@@ -59,6 +59,12 @@ router.get("/inbox",
     // res.render("../views/reports/inbox.ejs",{allMessage});
     res.render("../views/listings/userbox.ejs",{allMessage});
 })
+router.get("/inbox/fromadmin",async(req,res)=>{
+    // res.send("admin");
+    let allMessage=await Message.find({fromadmin:true});
+
+    res.render("../views/listings/fromadmin.ejs",{allMessage});
+})
 
 
 

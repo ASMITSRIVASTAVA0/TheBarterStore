@@ -9,6 +9,10 @@ const msgSchema=new Schema({
         type:Schema.Types.ObjectId,
         ref:"User",
     },
+    fromadmin:{
+        type:Boolean,
+        default:false,
+    },
     to:{
         type:Schema.Types.ObjectId,
         ref:"User",
