@@ -26,26 +26,19 @@
         <!-- <div class="col-sm-3 col-md-6 mb- mb-sm-0"> -->
           <div>
 
-
+        
           <div class="card bg-light border-warning" style="color:black; padding:0.4rem;">
             <div class="card-body" style="padding:1rem;">
               <!-- <h4 style="color:crimson" card-title">@</h4> -->
               <!-- <h5 style="color:black" class="card-text">&nbs</h5> -->
-              <h3 style="color:rgb(0, 13, 255);">@</h3>
-              <h5>Message:</h5>
-              <h5>Product:</h5>
-              <h5>Address:</h5>
-              <h5>Contact No.</h5>
+              <h3 style="color:rgb(0, 13, 255);">@ADMIN</h3>
+              <h4><%=Message.message%></h4>
               
-              <b style="color:crimson;">@ is interested in buying your product @, 
-                Information of buyer is provided above, if interested in selling your product,
-            kindly contact @</b>
+              
               <!-- <a style="margin:0.5rem;" href="#" class="btn btn-primary">Reply</a> -->
               <p style="opacity:0.7;">Send on:<%=Message.createdAt.toLocaleString().split(", ")[0]%></p>
               
-              <form action="#">
-                <button class="btn btn-outline-warning">If already Sold, inform buyer</button>
-              </form>
+              
             </div>
           </div>
 

@@ -151,7 +151,7 @@ module.exports.renderEditForm=async (req,res)=>{
 module.exports.updateListing=async (req,res)=>{
     // if(!req.body.listing)
     // throw new ExpressError(400,"Send valid data for listing");
-
+    // return res.redirect(`/listings/${id}`);
     // extract id for update 
     let {id}=req.params;
     // console.log(id);

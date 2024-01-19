@@ -48,13 +48,15 @@ router.delete("/product/delete/:id",async(req,res)=>{
     let listing=await Listing.findByIdAndDelete(id);
     console.log(listing);
     console.log(id);
-
+    let report =await Report.find({product:id});
+    report.resolved=true;
+    let resolvedResport=await report.save();
     // let allReports=await Report.find({product:id}).deleteMany();
-    let allReports=await Report.findById({product:id});
-    for(Report of allReports)
-    {
-        Report.resolved=true;
-    }
+    // let allReports=await Report.findById({product:id});
+    // for(Report of allReports)
+    // {
+        // Report.resolved=true;
+    // }
     
     req.flash("success","Product Deleted Successfully");
     res.redirect("/listings/reports");
@@ -103,7 +105,8 @@ router.post("/:id/:productid",async(req,res)=>{
 
 
 
-    // let listing=await Listing.findByIdAndDelete(productid);
+    let listing=await Listing.findByIdAndDelete(productid);
+    console.log(listing);
     let report=await Report.findById(id);
     report.resolved=true;
     let result=await report.save();

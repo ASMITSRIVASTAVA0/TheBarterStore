@@ -89,9 +89,17 @@ module.exports.isReviewAuthor=async (req,res,next)=>{
 module.exports.validateListing=(req,res,next)=>{
     // .validate joi me defined as listingSchema joi k obj to use kr skte
     let {error}=listingSchema.validate(req.body);
-    let imgurl=req.body.listing.image.url;
-    console.log("inside middleware==="+imgurl);
+
+    console.log("inupdate route , for img usrl="+req.body.listing.image);
+
+    // let imgurl=req.body.listing.image.url;
+    // console.log("inside middleware==="+imgurl);
+
+
+
+
     // req.body me listing obj h
+
     // listing obj should follow joi schema/listingSchema 
     if(error)
     {

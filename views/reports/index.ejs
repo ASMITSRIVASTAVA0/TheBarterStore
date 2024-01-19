@@ -56,14 +56,17 @@
                         
 
                         <!-- Button to trigger modal -->
-                        <form method="POST" action="/listings/reports/product/delete/<%=Report.product._id%>?_method=DELETE">
-                          <button class="btn btn-danger">Delete</button>
-                        </form>
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scrollableModal<%=Report._id%>1">
-                          View
-                        </button>
+                        <!-- <div style="display: flex; justify-content: space-between;"> -->
+                          <!-- <form style="display: inline-block;" method="POST" action="/listings/reports/product/delete/<%=Report.product._id%>?_method=DELETE"> -->
+                            <!-- <button class="btn btn-danger">Delete</button> -->
+                          <!-- </form> -->
+                          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scrollableModal<%=Report._id%>1">
+                            View
+                          </button>
+                        <!-- </div> -->
+                        
                         <!-- Scrollable Modal -->
-                        <div class="modal fade" id="scrollableModal<%=Report._id%>1" tabindex="-1" role="dialog" aria-labelledby="scrollableModalLabel" aria-hidden="true">
+                        <div class="modal fade offset-" id="scrollableModal<%=Report._id%>1" tabindex="-1" role="dialog" aria-labelledby="scrollableModalLabel" aria-hidden="true">
                           <div class="modal-dialog modal-dialog-scrollable" role="document">
                             <div class="modal-content">
 
@@ -78,7 +81,7 @@
                               
 
 
-                              <div class="modal-body">
+                              <div class="modal-body offset-3">
                                 <div class="row mt-3" >
 
                                       
@@ -144,7 +147,7 @@
                       </div>
                       <div>
                         <!-- <div></div> -->
-                        <button class="btn btn-warning">Inform</button>
+                        <!-- <button class="btn btn-warning">Inform</button> -->
                         
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scrollableModal<%=Report._id%>2">
                           View
@@ -206,7 +209,7 @@
                         <h5>Report Against:</h5>
                       </div>
                       <div>
-                        <button class="btn btn-warning">Inform</button>
+                        <!-- <button class="btn btn-warning">Inform</button> -->
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#scrollableModal<%=Report._id%>3">
                           View
                         </button>
@@ -318,9 +321,11 @@
                         <h5></h5>
                       </div>
                       <div>
-                        
+                        <!-- <form style="display: inline-block;" method="POST" action="/listings/reports/product/delete/<%=Report.product._id%>?_method=DELETE"> -->
+                          <!-- <button class="btn btn-danger">Delete</button> -->
+                        <!-- </form> -->
                           <form method="POST" action="/listings/reports/<%=Report._id%>/<%=Report.product._id%>" >
-                            <button class="btn btn-success">Resolve</button>
+                            <button class="btn btn-warning">Delete Product and Resolve</button>
                           </form>
 
 
