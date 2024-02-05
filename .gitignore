@@ -1,4 +1,4 @@
 .env
 node_modules/
 classroom
-app.js/
+app.js
