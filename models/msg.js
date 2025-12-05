@@ -26,10 +26,7 @@ const msgSchema=new Schema({
         ref:"Listing",
         // required:true,
     },
-    address:{
-        type:String,
-        // required:true,
-    },
+    
     contact:{
         type:String,
         // required:true,

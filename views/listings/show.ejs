@@ -30,9 +30,7 @@
                     This is for <%=listing.year%> students;
                     <br>
                     Condition:&nbsp;&nbsp;<%=listing.condition%>
-                    <br>
-                    Location:&nbsp;&nbsp;<%=listing.location %>
-                    <br>
+                    
                     <!-- Country:-->
 
                     
@@ -178,13 +176,7 @@
                 </p>
                 <hr>
             </div>
-            <div class="col-8 mb-3">
-                <h3 style="color:crimson">Where you'll be</h3>
-                <br>
-                <!-- <p><%=listing.geometry.coordinates%></p> -->
-                <!-- id=map hi dena hoga -->
-                <div id="map"></div>
-            </div>
+           
             <br>
             <div>
 
@@ -199,61 +191,11 @@
         
 
     </div>
-    <!-- map ke liye -->
-    <!-- taki js file me ye variable defined ho -->
+    
     <script>
        
     </script>
 
-    <!-- <script src="../js/map.js"></script> -->
-    <script>
-        // const coordinates=<%- JSON.stringify(listing.geometry.coordinates) %>;
-        // const location=<%-JSON.stringify(listing.location)%>;
-        const listing=<%- JSON.stringify(listing) %>;
-        // TO MAKE THE MAP APPEAR YOU MUST
-        // ADD YOUR ACCESS TOKEN FROM
-        // https://account.mapbox.com
-        mapboxgl.accessToken = 'pk.eyJ1IjoiZGVsdGEtc3R1ZHVlbnQiLCJhIjoiY2xvMDk0MTVhMTJ3ZDJrcGR5ZDFkaHl4ciJ9.Gj2VU1wvxc7rFVt5E4KLOQ';
-        const map = new mapboxgl.Map({
-            container: 'map',
-            // Choose from Mapbox's core styles, or make your own style with Mapbox Studio
-            style:'mapbox://styles/mapbox/satellite-streets-v12',
-            // style: 'mapbox://styles/mapbox/streets-v12',
-            // center: [12.550343, 55.665957],
-            // center:listing.geometry.coordinates,
-            center:listing.geometry.coordinates,
-            
-            
-            zoom: 8
-        });
     
-//         // Create a default Marker and add it to the map.
-//         const marker=new mapboxgl.Marker({color:"crimson"})
-//         // const marker1 = new mapboxgl.Marker()
-
-//         .setLngLat(coordinates)
-//         // .setPopup(new mapboxgl.Popup({offset:25}))
-//         // .setHTML("<h1>Hello world<h1>")
-//         .addTo(map);
-
-//         // const popup = new mapboxgl.Popup({offset: popupOffsets, className: 'my-class'})
-            
-//         const popup = new mapboxgl.Popup({offset: 25})
-// // .setLngLat(e.lngLat)
-// .setHTML("<h1>Hello World!</h1>")
-// // .setMaxWidth("300px")
-// .addTo(map);
-//         // Create a default Marker, colored black, rotated 45 degrees.
-//         // const marker2 = new mapboxgl.Marker({ color: 'black', rotation: 45 })
-//         //     .setLngLat([12.65147, 55.608166])
-//         //     .addTo(map);
-            const marker=new mapboxgl.Marker({color:"crimson"})
-            .setLngLat(listing.geometry.coordinates)
-            .setPopup(
-                new mapboxgl.Popup({offset:25})
-                .setHTML(`<h3 style="color:crimson; font-weight:700;">${listing.location}<h3><p style="color:black; font-size:1rem;">Location of The Seller!<p>`)
-            
-            )
-            .addTo(map);
-    </script>
+    
 </body>

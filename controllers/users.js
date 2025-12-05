@@ -2,33 +2,28 @@ const User=require("../models/user.js");
 const path=require("path");
 
 module.exports.renderSignupForm=(req,res)=>{
-    // res.render("/user/login.ejs");
-    // res.render("C:/Users/sriva/Desktop/java language/Major Project/views/user/signup.ejs");
-    // res.render("/user/login.ejs");
     const signupViewPath=path.join(__dirname,"../views/user/signup.ejs");
     res.render(signupViewPath);
 }
 
 module.exports.signup=async (req,res)=>{
     try{
-        let {username,email,password,profilepic,bio,year,key}=req.body;
+        let {username,email,password,bio,year,key}=req.body;
 
         let admin=false;
-        // if(key===process.env.ADMIN-KEY)
-        if(key=="adminkey")
-        // console.log(key+" "+"adminkey");
+        if(key===process.env.ADMIN-KEY)
         admin=true;
 
 
 
-        const newUser=new User({email,username,profilepic,bio,year,admin});
+        const newUser=new User({email,username,bio,year,admin});
         const registeredUser=await User.register(newUser,password);
-        console.log(registeredUser);
         // chahte ki signup ke sath ke baad phir se login n krna pde seedhe login ho
         req.login(registeredUser,(err)=>{
-                if(err){
+                if(err)
                 return next(err);
-            }
+                
+            
             req.flash("success","Welcome to TheBarter Store!");
             res.redirect("/listings");
         })
@@ -44,26 +39,25 @@ module.exports.signup=async (req,res)=>{
     
 }
 
-module.exports.login=async (req,res)=>{
-    // res.send("welcome");
-    console.log("inside authen"),
+module.exports.login=async (req,res,next)=>{
+        let username=req.body.username;
+    let key=req.body.key;
+    if(username==="ADMIN"&&(!key)){
+        req.flash("error","Admin requires secret key");
+        return res.redirect("/admin");
+    }
     req.flash("success","Welcome Back to TheBarter Store");
-    // res.redirect("/listings");
 
     // ek authentication ho jata passport req.session ke extra variable ko delete kr deta so its undedined
     // to access redirecturl save it to req.locals thus passport cant delete it
     // agar seedhe login krege to isLoggedIn midware trigger n hua to rediect url undefined
     let redirectUrl=res.locals.redirectUrl||"/listings";
     res.redirect(redirectUrl);
-    // res.redirect(res.locals.redirectUrl);
-    // res.redirect(req.session.redirectUrl);
 }
 
 module.exports.renderLoginForm=(req,res)=>{
     const loginViewPath=path.join(__dirname,"../views/user/login.ejs");
     res.render(loginViewPath);
-    // res.render("/user/login.ejs");
-    // res.render("C:/Users/sriva/Desktop/java language/Major Project/views/user/login.ejs");
 }
 
 module.exports.logout=(req,res,next)=>{

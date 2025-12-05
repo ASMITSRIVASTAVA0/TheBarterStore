@@ -25,6 +25,6 @@ const feedbackSchema=new Schema({
         type:String,
         required:true,
     }
-})
+});
 
 module.exports=mongoose.model("Feedback",feedbackSchema);

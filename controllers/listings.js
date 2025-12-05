@@ -88,11 +88,17 @@ module.exports.createListing=async (req,res,next)=>{
     // href="https://github.com/mapbox/mapbox-sdk-js/blob/main/docs/services.md#forwardgeocode-1"
 
     // geocoding ek cliet h joki forward and reverse(backword) coding krata
+
+
+    /*
     let result=await geocodingClient.forwardGeocode({
         query: req.body.listing.location,
         limit: 1//delhi badi jagah to kai coordinate a skte to 1(limit) coordinate chahiye
-    })
-      .send()
+    }).send()
+        */
+
+
+      
         // .then(response => {
         //   const match = response.body;
         // });
@@ -118,7 +124,9 @@ module.exports.createListing=async (req,res,next)=>{
     // newListing.image.url="../public/views/pics/book.png";
     let imgurl=newListing.image.url;
     // let type=await checkFileType();
+    /*
     newListing.geometry=result.body.features[0].geometry;
+    */
 
     let savedListing=await newListing.save();
     console.log(savedListing);
@@ -173,19 +181,26 @@ module.exports.updateListing=async (req,res)=>{
     //     limit:1,
     // })
     // .send()
+
+    /*
     let result=await geocodingClient.forwardGeocode({
         query: req.body.listing.location,
         limit: 1//delhi badi jagah to kai coordinate a skte to 1(limit) coordinate chahiye
     })
       .send()
+      */
 
+    /*
     newListing.geometry=result.body.features[0].geometry;
-
+    */
     // 
     newListing.title=req.body.listing.title;
     newListing.description=req.body.listing.description;
     newListing.price=req.body.listing.price;
+    /*
     newListing.location=req.body.listing.location;
+    */
+   
     newListing.year=req.body.listing.year;
     newListing.condition=req.body.listing.condition;
 

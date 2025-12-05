@@ -18,7 +18,7 @@ const listingSchema=new Schema({//Schema==mongoose.Schema
     image:{
         // type:String,
         // // agar img url null undefined 
-        // default:"https://img.freepik.com/free-photo/sunset-time-tropical-beach-sea-with-coconut-palm-tree_74190-1075.jpg?w=900&t=st=1701270371~exp=1701270971~hmac=3bfc8f4609d19c7cdd748c355b387c07d1fa9f6cec5cc51cba5d61a7fb996097",
+        // default:"https:/image/book....",
         // set:(v)=>
         //     v===""
         //     ?"https://img.freepik.com/free-photo/sunset-time-tropical-beach-sea-with-coconut-palm-tree_74190-1075.jpg?w=900&t=st=1701270371~exp=1701270971~hmac=3bfc8f4609d19c7cdd748c355b387c07d1fa9f6cec5cc51cba5d61a7fb996097"
@@ -27,12 +27,11 @@ const listingSchema=new Schema({//Schema==mongoose.Schema
         // //jo img k url likha vahi dikhao
         url:String,
         filename:String,
-        
+        // default:"https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.com%2Fvectors%2Fbook&psig=AOvVaw2Hsi-D0g2tVkpLPdF62tiJ&ust=1758521602911000&source=images&cd=vfe&opi=89978449&ved=0CBUQjRxqFwoTCOj0vs2Z6Y8DFQAAAAAdAAAAABAE",
         
     },
     price:Number,
-    location:String,
-    // country:String,
+
     reviews:[
         {
             // objectid store hogi reviews ki
@@ -46,28 +45,8 @@ const listingSchema=new Schema({//Schema==mongoose.Schema
         type:Schema.Types.ObjectId,
         ref:"User",
     },
-    // GeoJSON is a format for storing geographic points and polygons. MongoDB has excellent support for geospatial queries on GeoJSON objects
-    // https://mongoosejs.com/docs/geojson.html
-    geometry:{
-        type:{
-            type:String,
-            enum:["Point"],
-            required:true
-        },
-        coordinates:{
-            type:[Number],
-            // required:true
-            required:true
-        }
-    },
-    // category:{
-    //     type:String,
-    //     enum:["Mountains","Arctic","Farms",
-    //     "Deserts","Rooms","Iconic Cities",
-    //     "Dome","Boats","Hill Stations","Castle","Camping","Amazing Pools"],
-    //     required:true
-        
-    // }
+
+
     year:{
         type:String,
         enum:["1year","2year","3year","4year"],

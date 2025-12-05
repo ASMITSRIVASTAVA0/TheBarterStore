@@ -1,48 +1,10 @@
-// npm init -y
-// npm i express
-// npm i ejs
-// npm i mongoose
-// npm i method-override
-// npm i ejs-mate
-
-// npm install cookie-parser
-
-// npm install express-session
-// npm i connect-flash
-
-// npm i joi  (to validate schema from server side(hopscotch))
-
-// website====passportjs.org
-// npm i passport
-// npm i passport-local
-// npm i passport-local-mongoose   =====taki moongoose sath sahi chle
-
-// npm i multer===taki form se file upload kr ske
-// npm i dotenv
-// npm i cloudinary
-// npm i multer-storage-cloudinary
-
-// npm i @mapbox/mapbox-sdk
-
-// npm i connect-mongo===express-session local storage ke liye jb online dalege to 
-
-// npm i nodemailer
-
-
-// jb database ko initialize terminal me cd/"Desktop"/..../init me index.js command dena
-
-
-// har koi ye file ko n dekhe
 var atlasdb_url;
 if(process.env.NODE_ENV!="production")
 {
     // dotenv file ko tabhi es file me require jb ye project production level pr nhi
+    // balki development phase me ho
     require("dotenv").config();
     atlasdb_url=process.env.ATLASDB_URL;
-    console.log(process.env.ATLASDB_URL);
-    // console.log(process.env);
-    console.log(process.env.MAP_TOKEN);
-    console.log(process.env.SECRET);
 }
 
 
@@ -50,28 +12,25 @@ const express=require("express");
 const app=express();
 const mongoose=require("mongoose");
 
-// error handling
-const wrapAsync=require("./utils/wrapAsync.js");
-const ExpressError=require("./utils/ExpressError.js");
 
 const session=require("express-session");
 // flash session ke baad use
+
 const flash=require("connect-flash");
 // session ke baad connect mongo
-const MongoStore=require("connect-mongo");
 
+
+const MongoStore=require("connect-mongo");
+// all express sessions to be stored in mongodb instead of (by-default) server-memory that resets when server restarts
 
 // authentication
 const passport=require("passport");
+
 const LocalStrategy=require("passport-local");
+// to use usename/password as login credential
 
 
 const User=require("./models/user.js");
-
-const middleware=require("./middleware.js");
-
-// reviews
-const Review=require("./models/review.js");
 
 
 
@@ -82,8 +41,7 @@ const Review=require("./models/review.js");
 const listingRouter=require("./routes/listing.js");
 const reviewRouter=require("./routes/review.js");//ye model h
 const userRouter=require("./routes/user.js");
-const categoryRouter=require("./routes/category.js");
-const filterRouter=require("./routes/filter.js");
+const feedbackRounter=require("./routes/feedback.js");
 const reportRouter=require("./routes/report.js");
 const msgRouter=require("./routes/msg.js");
 // ejs-mate k setup
@@ -98,38 +56,42 @@ app.use(methodOverride("_method"));
 
 // setup for ejs
 const path=require("path");
-app.set("view engine","ejs");
-app.set("views",path.join(__dirname,"views"));
+//nodes buildin path module, 
 
-// to use delete patch ,etc req
-// to read get req data
+app.set("view engine","ejs");
+// tell express app will use EJS as templating engine
+
+app.set("views",path.join(__dirname,"views"));
+// tell express where to find tmeplate files
+
+
+// to use delete, patch ,etc req
+// to read get req data (obj inside obj)
 app.use(express.urlencoded({extended:true}));
 
-// from chatgpt
+
 const bodyParser=require("body-parser");
 app.use(bodyParser.json());
+//parse req with JSON payloads, 
+//any req with Content-Type:application/json will be converted into js obj in req.body
 
-// listing.js ke andar schema btaya aur listing collection bna ke export
-// listings.js me sirf Listing k schema define h
-// /init/index.js ko require nhi as dono separetely mongodb se connected h
-// data initialize k kaam sirf index.js k joki separately kiya j skta
-const Listing=require("./models/listing.js");
+
 
 
 // setup to serve static files
 app.use(express.static(path.join(__dirname,"/public")));
 app.use(express.static(path.join(__dirname,"/includes")));
+// express.static() inbuild middleware, serve static files like html,css,js,images
+// allow browser to directly access files in these folder without creating separate routes for each file
+
 //ab /public/css/style nhi ,bs /css/style as pubic and app.js is joined
 // ab style.css sirf boiler plate me link krege to sbme link hoyegi
 
 
 // joi k schema moongoose k schema nhi hota
-// ye server side(hopscotch) validation k schema hota
+// ye server side(hopscotch/postman) validation k schema hota
 // form se cliet side validation ki by not allowing user to leave required fields
 // pr agar hopscotch se glt info aai to uske liye joi
-const {listingSchema,reviewSchema}=require("./schema.js");
-const { stringify } = require("querystring");
-// const {listingSchema}=require("./schema.js");
 
 // make h func to perform work of Joi check req.body when data se send from hopscotch/postman
 // const validateListing=(req,res,next)=>{
@@ -147,31 +109,20 @@ const { stringify } = require("querystring");
 //     next();
 // // chuki next ko call to ye upar likho
 // }
-// const validateReview=(req,res,next)=>{
-//     let {error}=reviewSchema.validate(req.body);
 
-//     if(error)
-//     {
-//         let errMsg=error.details.map((el)=el.message).join(",");
-//         throw new ExpressError(400,errMsg);
-//     }
-//     else
-//     next();
-// }
 
 // terminal me mongosh start rkhna
 
 
 // connect kro db se
-const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust";
+
+// const MONGO_URL="mongodb://127.0.0.1:27017/thebookbarter";
 
 // let atlasdb_url=process.env.ATLASDB_URL;
 // atlasdb_url=atlasdb_url.toString();
 // let atlasdb_url=process.env.ATLASDB_URL;
-// console.log(atlasdb_url);
 // atlasdb_url=atlasdb_url.toString();
 
-// console.log(altasdb_url);nod
 
 main()
 .then(()=>{
@@ -182,25 +133,13 @@ main()
 })
 
 async function main(){
-    // await mongoose.connect(MONGO_URL);
-    
-    // await mongoose.connect(atlasdb_url);
-    // await mongoose.connect(stringify(atlasdb_url));
-    // console.log(atlasdb_url);
-    // await mongoose.connect(atlasdb_url);
-    
-    // await mongoose.connect(process.env.ATLASDB_URL);
-    await mongoose.connect("mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority");
-    
+    await mongoose.connect(process.env.ATLASDB_URL);
 }
 
 // render krane ke liye package.json me "engines":{"node":"20.9.0"}
 const store=MongoStore.create({
-    // mongoUrl:process.env.ATLASDB_URL,
-    // mongoUrl:atlasdb_url,
-    mongoUrl:"mongodb+srv://ASMIT2:Ke6LsoqrpvJI4KJb@cluster1.yddquej.mongodb.net/?retryWrites=true&w=majority",
+    mongoUrl:process.env.ATLASDB_URL,
     crypto:{
-        // secret:"mysupersecretcode",
         secret:process.env.SECRET
     },
     // time after which session get stop
@@ -214,7 +153,6 @@ store.on("error",()=>{
 // req ke pehle session
 const sessionOptions={
     store,
-    // secret:"mysupersecretcode",
     secret:process.env.SECRET,
     resave:false,
     saveUninitialized:true,
@@ -250,15 +188,17 @@ app.use(flash());
 app.use(passport.initialize());
 //taki har req ke liye passport initialize ho
 // passport.session ko as midware use krte
+
 // step2
 app.use(passport.session());//ek session me ek baar login
 // User model h
 // use static authenticate method of model in localstrategy
 // authenticate() generate a function that is used in passport's localstrategy
+
 // step3
 passport.use(new LocalStrategy(User.authenticate));
 
-// ye khud se search kiya tha
+
 // step4
 passport.use(User.createStrategy());//jo User require kiya h usi me te lgaya
 // step5
@@ -276,6 +216,7 @@ passport.deserializeUser(User.deserializeUser());//session khatam hone ke baad
 //     res.locals.success=req.flash("success");
 //     next();
 // })
+
 app.use((req,res,next)=>{
     // console.log("sucess====="+req.flash("success"));
     // abhi flash ki key "success" aur "error" value define nhi kri
@@ -309,25 +250,16 @@ app.use((req,res,next)=>{
 //     res.send("asmit");
 // })
 app.use("/",userRouter);
-app.use("/listings/reports/msg",msgRouter
-    // async(req,res)=>{
-    // res.send("reply");
 
-)
+app.use("/listings/feedback",feedbackRounter);
 
-// app.get("/listings/filter",async(req,res)=>{
-//     res.send("working well");
-// })
-// app.use("/listings/filter",filterRouter);
 
-app.use("/listings/reports",reportRouter
-// async(req,res)=>{
-    // res.send("report");}
-)
+app.use("/listings/reports/msg",msgRouter);
 
-app.use("/listings/feedback",categoryRouter);
+app.use("/listings/reports",reportRouter);
+
+
 app.use("/listings",listingRouter);
-
 
 app.use("/listings/:id/reviews",reviewRouter);//parent route
 
@@ -350,10 +282,7 @@ app.all("*",(req,res,next)=>{
     // next(new ExpressError(404,"Page not Found"));
 
 
-    // req.flash("error","Page not Found!");
-    // res.send("page not found");
-    // res.render("views/listings/index.ejs");
-    // req.flash("error","Page not Found");
+    req.flash("error","Page not Found");
     res.redirect("/listings");
     // res.render("./views/listings/index.ejs");
     // res.redirect("./public/views/listings/index.ejs");
@@ -405,13 +334,7 @@ to use flash session must be installed
 
 */
 
-/*
 
-password=
-library that helps in authentications
-
-
-*/
 
 /*
 
@@ -421,12 +344,99 @@ implement design pattern for listings
 */
 
 
+
+
+// npm init -yes
+// create package.json file with default values, -yes flag automatically accepts all default values and initialize new node.js project
+
+// -------------------------------------------------------
+
+
+// npm i express
+// express=nodejs web framework
+
+// -------------------------------------------------------
+
+
+// npm i ejs (embedded javascript, to write html with embedded js)
+// app.set("view engine","ejs") to set ejs as view engine
+
+// -----------------------------------------------------
+
+
+
+// npm i mongoose
+
+// npm i method-override
+// send PUT/DELETE instread of limited to GET/POST
+// use _method para in query string to determin actaul http method to use
+
+// -------------------------------------------------------
+
+// npm i ejs-mate
+// enchanced engine for ejs,features like layouts, with ejs can render one .js file at a time, with ejs-mat, create common headers, etc,
+
+// -----------------------------------------------------------
+
+
+// npm install cookie-parser
+// middleware that lets my server read and set cookies as express doesnot handle cookie by default
+
+// ----------------------------------------------------------
+
+
+// npm install express-session
+// cookie-parser store data in browser while session store in server,cookie less secure, session more,
+
+// -------------------------------------------------------
+
+// npm i connect-flash
+// store temporary messages in session
+
+// --------------------------------------------------------
+
+// npm i joi  
+// (to validate schema from server side(hopscotch))
+
+// ------------------------------------------------------------------
+
+// website====passportjs.org
+// npm i passport(core middleware, framework for login methods(strategy))
+// npm i passport-local (strategy for username/password authentication)
+// npm i passport-local-mongoose   =====taki moongoose sath sahi chle
+
+// --------------------------------------------------------
+
+
+// npm i multer===taki form se file upload kr ske
+// express only parses text data in req, multer parses multipart/form-data 
+// allow to save files either on server disk or in memory(buffer)
+
+// --------------------------------------------------------
+
+
+// npm i dotenv
+// loads environment variable from .env file into process.env 
+
+// --------------------------------------------------------
+
+
+// npm i cloudinary
+
+// npm i multer-storage-cloudinary
+
+
 /*
-// pushing to git
-
-step1=git init
-agar chahte ki kuc file ko track n kre to gitignore
-touch (.)gitignore
-
-
+API = How software communicates.
+Library = Pre-built code you use.
+SDK = Full toolkit including libraries, APIs, and tools.
 */
+
+
+// npm i connect-mongo
+// express-session local storage ke liye jb online dalege to 
+
+// --------------------------------------------------
+
+
+

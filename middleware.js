@@ -4,15 +4,17 @@
 
 const Listing=require("./models/listing.js");
 const Review=require("./models/review.js");
-const Feedback=require("./models/feedback.js");
 
 // for validation
+
+// custom error class to send customized err message and err code
 const ExpressError=require("./utils/ExpressError.js");
 const {listingSchema,reviewSchema,feedbackSchema}=require("./schema.js");//Joi k schema
 
 module.exports.isLoggedIn=(req,res,next)=>{
     // console.log("jaha redirect hone wala tha===="+req.path);
-    console.log(req.originalUrl);//complete url taki jaha tha vahi se aage bde
+    // console.log(req.originalUrl);
+    //complete url taki jaha tha vahi se aage bde
     if(!req.isAuthenticated())
     //method defined inside passport
     // ye method tb jb user username,password dalega
@@ -34,10 +36,28 @@ module.exports.isLoggedIn=(req,res,next)=>{
 module.exports.isAdmin=async(req,res,next)=>{
     // console.log("currsure"+req.body.currUser);
     // console.log(req.body.password);
+    let username=req.body.username;
+    
+    // let password=req.body.password;
+    // console.log("usernaem",username);
+    // console.log("passowrd",password);
     let key=req.body.key;
-    // agar key enter n ki to koi baat nhi
-    if(!key)
+    // // agar key enter n ki to koi baat nhi
+    // if(req.body.username==="ADMIN"){
+    //     // console.log("inside");
+    //     req.flash("error","Admin Require Secret key to login");
+    //     // return next();
+    //     res.redirect("/login");
+    //     // return next();
+    // }
+    if(!key&&username==="ADMIN")
     {
+        req.flash("error","You are not the Admin as secret key not provided!");
+        // return next();
+        return res.redirect("/login");
+    }
+    if(!req.isAuthenticated()){
+        // req.flash("error","You are not the Admin as username is not correct!");
         return next();
     }
     if(key==="adminkey")

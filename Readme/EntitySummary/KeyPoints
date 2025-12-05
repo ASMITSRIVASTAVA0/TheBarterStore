@@ -1,0 +1,26 @@
+Summary of Key Relationships:
+User ↔ Listing (One-to-Many): A single User can own many Listings. A Listing belongs to one User (owner).
+
+User ↔ Review (One-to-Many): A single User (as author) can write many Reviews. A Review is written by one User.
+
+Listing ↔ Review (One-to-Many): A single Listing can have many Reviews. A Review belongs to one Listing (via the array in Listing).
+
+User ↔ Feedback (One-to-Many): A single User (as author) can write many Feedback entries. A Feedback is written by one User.
+
+User ↔ Message (Complex Many-to-Many):
+
+A User can be the sender (from) of many messages.
+
+A User can be the recipient (to) of many messages.
+
+This creates a messaging network between users.
+
+Listing ↔ Message (One-to-Many): A Listing (product) can be the subject of many Message conversations.
+
+User ↔ Report (Complex Many-to-Many):
+
+A User (from) can file many Reports.
+
+A User (to) can be reported in many Reports.
+
+A Listing (product) can be reported in many Reports.

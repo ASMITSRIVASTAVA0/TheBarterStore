@@ -30,11 +30,7 @@ const userSchema=new Schema({
         type:String,
         required:true
     },
-    // profilepic:{
-    //     url:String,
-    //     filename:String,
-    //     // required:true,
-    // },
+    
     bio:{
         type:String,
         required:true
